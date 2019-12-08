@@ -1,6 +1,7 @@
 package org.acme.controller;
 
 import org.acme.shakesperean_pokedex.controller.PokedexController;
+import org.acme.shakesperean_pokedex.dto.poke_api.PokemonSpecies;
 import org.acme.shakesperean_pokedex.service.PokeApiService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -28,11 +29,11 @@ public class PokedexControllerTest {
     @Test
     @DisplayName("should return a hello message")
     public void testHello() {
-        when(pokeApiService.getDescription(anyString())).thenReturn(A_RESPONSE);
+        when(pokeApiService.getPokemonSpecies(anyString())).thenReturn(new PokemonSpecies());
 
-        var response = pokedexController.hello();
+        var response = pokedexController.getDescription("");
 
-        verify(pokeApiService, times(1)).getDescription(anyString());
+        verify(pokeApiService, times(1)).getPokemonSpecies(anyString());
         assertEquals(A_RESPONSE, response);
     }
 

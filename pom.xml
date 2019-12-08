@@ -64,6 +64,10 @@
       <version>2.23.0</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+    <groupId>io.quarkus</groupId>
+    <artifactId>quarkus-resteasy-jackson</artifactId>
+  </dependency>
   </dependencies>
   <build>
     <plugins>

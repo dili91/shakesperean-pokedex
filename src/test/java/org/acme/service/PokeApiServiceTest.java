@@ -1,8 +1,40 @@
 package org.acme.service;
 
-import org.junit.jupiter.api.Disabled;
+import io.quarkus.test.junit.QuarkusTest;
+import org.acme.shakesperean_pokedex.service.PokeApiService;
+import org.eclipse.microprofile.rest.client.inject.RestClient;
+import org.junit.jupiter.api.Test;
 
-@Disabled
+import javax.inject.Inject;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+@QuarkusTest
 public class PokeApiServiceTest {
-    //todo
+
+    private static final String A_POKEMON_NAME = "charizard";
+    private static final String A_POKEMON_COLOR = "red";
+    private static final String A_POKEMON_DESCRIPTION = "Charizard flies around the sky in search of powerful opponents.\nIt breathes fire of such great heat that it melts anything.\nHowever, it never turns its fiery breath on any opponent\nweaker than itself.";
+    private static final String A_DEFAULT_LANGUAGE = "en";
+    private static final String A_DEFAULT_VERSION = "alpha-sapphire";
+
+    @Inject
+    @RestClient
+    PokeApiService pokeApiService;
+
+    @Test
+    public void shouldGetAPokemonDescription() {
+        var species = pokeApiService.getPokemonSpecies(A_POKEMON_NAME);
+
+        assertEquals(A_POKEMON_NAME, species.getName());
+        assertEquals(A_POKEMON_COLOR, species.getColor().getName());
+        assertEquals(A_POKEMON_DESCRIPTION,
+                species.getFlavorTextEntries().stream()
+                        .filter(entry -> entry.getLanguage().getName().equalsIgnoreCase(A_DEFAULT_LANGUAGE))
+                        .filter(entry -> entry.getVersion().getName().equalsIgnoreCase(A_DEFAULT_VERSION))
+                        .findFirst()
+                        .orElseThrow()
+                        .getFlavorText()
+        );
+    }
 }
