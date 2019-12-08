@@ -9,6 +9,7 @@ import static org.hamcrest.CoreMatchers.is;
 
 @QuarkusTest
 public class IntegrationTest {
+    private static final String A_POKEMON_NAME = "charizard";
 
     //todo
 
@@ -16,10 +17,11 @@ public class IntegrationTest {
     @DisplayName("should return a hello message")
     public void testHelloEndpoint() {
         given()
+                .queryParam("name", A_POKEMON_NAME)
           .when().get("/poke")
           .then()
              .statusCode(200)
-             .body(is("whatever"));
+             .body(is(A_POKEMON_NAME));
     }
 
 }

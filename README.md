@@ -15,6 +15,7 @@ Documentation available at http://localhost:8080/swagger-ui/
 ## Testing the application
 //todo
 
+## Extras
 ## Opentracing
 //todo: improve
 
@@ -24,3 +25,8 @@ To start the tracing system to collect and display the captured traces:
 
 UI is available at http://localhost:16686/search
 
+## Docker
+//todo
+
+## Native image
+//todo

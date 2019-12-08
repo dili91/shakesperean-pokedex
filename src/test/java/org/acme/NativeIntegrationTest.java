@@ -1,11 +1,10 @@
 package org.acme;
 
 import io.quarkus.test.junit.NativeImageTest;
-import org.acme.controller.PokedexControllerTest;
+import org.junit.jupiter.api.Disabled;
 
 @NativeImageTest
-public class NativePokedexControllerIT extends PokedexControllerTest {
-
+@Disabled
+public class NativeIntegrationTest extends IntegrationTest {
     // Execute the same tests but in native mode.
-    //todo
 }

@@ -1,6 +1,7 @@
 package org.acme.service;
 
 import io.quarkus.test.junit.QuarkusTest;
+import org.acme.shakesperean_pokedex.dto.poke_api.PokemonSpecies;
 import org.acme.shakesperean_pokedex.service.PokeApiService;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 import org.junit.jupiter.api.Test;
@@ -27,7 +28,7 @@ public class PokeApiServiceTest {
 
     @Test
     public void shouldGetAPokemonDescription() {
-        var species = pokeApiService.getPokemonSpecies(A_POKEMON_NAME);
+        PokemonSpecies species = pokeApiService.getPokemonSpecies(A_POKEMON_NAME);
 
         assertEquals(A_POKEMON_NAME, species.getName());
         assertEquals(A_POKEMON_COLOR, species.getColor().getName());

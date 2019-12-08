@@ -3,6 +3,7 @@ package org.acme.controller;
 import org.acme.shakesperean_pokedex.controller.PokedexController;
 import org.acme.shakesperean_pokedex.dto.poke_api.PokemonSpecies;
 import org.acme.shakesperean_pokedex.service.PokeApiService;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,6 +17,7 @@ import static org.mockito.Mockito.*;
 
 
 @ExtendWith(MockitoExtension.class)
+@Disabled("to enable once controller implementation takes place")
 public class PokedexControllerTest {
     //todo complete
 
@@ -31,7 +33,7 @@ public class PokedexControllerTest {
     public void testHello() {
         when(pokeApiService.getPokemonSpecies(anyString())).thenReturn(new PokemonSpecies());
 
-        var response = pokedexController.getDescription("");
+        String response = pokedexController.getDescription("");
 
         verify(pokeApiService, times(1)).getPokemonSpecies(anyString());
         assertEquals(A_RESPONSE, response);
