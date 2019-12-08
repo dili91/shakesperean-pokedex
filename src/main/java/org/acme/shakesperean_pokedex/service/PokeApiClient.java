@@ -11,7 +11,7 @@ import javax.ws.rs.core.MediaType;
 
 @RegisterRestClient
 @Path("/api/v2")
-public interface PokeApiService {
+public interface PokeApiClient {
 
     @GET
     @Path("/pokemon-species/{name}")

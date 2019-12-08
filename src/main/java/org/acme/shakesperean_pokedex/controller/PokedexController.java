@@ -1,6 +1,6 @@
 package org.acme.shakesperean_pokedex.controller;
 
-import org.acme.shakesperean_pokedex.service.PokeApiService;
+import org.acme.shakesperean_pokedex.service.PokeApiClient;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import javax.inject.Inject;
@@ -16,11 +16,11 @@ public class PokedexController {
 
     @Inject
     @RestClient
-    PokeApiService pokeApiService;
+    PokeApiClient pokeApiClient;
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String getDescription(@QueryParam("name") String name) {
-        return pokeApiService.getPokemonSpecies(name).getName();
+        return pokeApiClient.getPokemonSpecies(name).getName();
     }
 }

@@ -2,7 +2,7 @@ package org.acme.controller;
 
 import org.acme.shakesperean_pokedex.controller.PokedexController;
 import org.acme.shakesperean_pokedex.dto.poke_api.PokemonSpecies;
-import org.acme.shakesperean_pokedex.service.PokeApiService;
+import org.acme.shakesperean_pokedex.service.PokeApiClient;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -23,7 +23,7 @@ public class PokedexControllerTest {
 
     private static final String A_RESPONSE = "andrea";
     @Mock
-    private PokeApiService pokeApiService;
+    private PokeApiClient pokeApiClient;
 
     @InjectMocks
     private PokedexController pokedexController;
@@ -31,11 +31,11 @@ public class PokedexControllerTest {
     @Test
     @DisplayName("should return a hello message")
     public void testHello() {
-        when(pokeApiService.getPokemonSpecies(anyString())).thenReturn(new PokemonSpecies());
+        when(pokeApiClient.getPokemonSpecies(anyString())).thenReturn(new PokemonSpecies());
 
         String response = pokedexController.getDescription("");
 
-        verify(pokeApiService, times(1)).getPokemonSpecies(anyString());
+        verify(pokeApiClient, times(1)).getPokemonSpecies(anyString());
         assertEquals(A_RESPONSE, response);
     }
 

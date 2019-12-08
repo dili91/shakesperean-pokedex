@@ -2,7 +2,7 @@ package org.acme.service;
 
 import io.quarkus.test.junit.QuarkusTest;
 import org.acme.shakesperean_pokedex.dto.poke_api.PokemonSpecies;
-import org.acme.shakesperean_pokedex.service.PokeApiService;
+import org.acme.shakesperean_pokedex.service.PokeApiClient;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +11,7 @@ import javax.inject.Inject;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @QuarkusTest
-public class PokeApiServiceTest {
+public class PokeApiClientTest {
 
     // todo optional: make this quarkus independent
     // todo optional: stub external api
@@ -24,11 +24,11 @@ public class PokeApiServiceTest {
 
     @Inject
     @RestClient
-    PokeApiService pokeApiService;
+    PokeApiClient pokeApiClient;
 
     @Test
     public void shouldGetAPokemonDescription() {
-        PokemonSpecies species = pokeApiService.getPokemonSpecies(A_POKEMON_NAME);
+        PokemonSpecies species = pokeApiClient.getPokemonSpecies(A_POKEMON_NAME);
 
         assertEquals(A_POKEMON_NAME, species.getName());
         assertEquals(A_POKEMON_COLOR, species.getColor().getName());
