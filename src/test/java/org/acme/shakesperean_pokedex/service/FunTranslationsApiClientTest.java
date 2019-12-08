@@ -3,7 +3,6 @@ package org.acme.shakesperean_pokedex.service;
 import io.quarkus.test.junit.QuarkusTest;
 import org.acme.shakesperean_pokedex.dto.fun_translations.Translation;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
