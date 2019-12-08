@@ -12,6 +12,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @QuarkusTest
 public class PokeApiServiceTest {
 
+    // todo optional: make this quarkus independent
+    // todo optional: stub external api
+
     private static final String A_POKEMON_NAME = "charizard";
     private static final String A_POKEMON_COLOR = "red";
     private static final String A_POKEMON_DESCRIPTION = "Charizard flies around the sky in search of powerful opponents.\nIt breathes fire of such great heat that it melts anything.\nHowever, it never turns its fiery breath on any opponent\nweaker than itself.";
