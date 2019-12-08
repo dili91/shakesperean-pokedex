@@ -8,16 +8,18 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
 
 @QuarkusTest
-public class PokedexControllerTest {
+public class IntegrationTest {
+
+    //todo
 
     @Test
     @DisplayName("should return a hello message")
     public void testHelloEndpoint() {
         given()
-          .when().get("/hello")
+          .when().get("/poke")
           .then()
              .statusCode(200)
-             .body(is("hello"));
+             .body(is("whatever"));
     }
 
 }
