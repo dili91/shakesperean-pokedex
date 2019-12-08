@@ -1,6 +1,6 @@
 # shakesperean-pokedex
 
-REST API that, given a Pokemon name, returns its Shakesperean description.
+A REST API that, given a Pokemon name, returns its Shakesperean description.
 Documentation available at http://localhost:8080/swagger-ui/
 
 ## Technology stack
@@ -16,7 +16,7 @@ Documentation available at http://localhost:8080/swagger-ui/
 //todo
 
 ## Extras
-## Opentracing
+### Opentracing
 //todo: improve
 
 To start the tracing system to collect and display the captured traces:
@@ -25,8 +25,8 @@ To start the tracing system to collect and display the captured traces:
 
 UI is available at http://localhost:16686/search
 
-## Docker
+### Docker
 //todo
 
-## Native image
+### Native image
 //todo
