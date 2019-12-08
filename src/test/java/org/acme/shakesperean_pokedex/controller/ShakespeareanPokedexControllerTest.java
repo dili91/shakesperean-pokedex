@@ -1,9 +1,9 @@
 package org.acme.shakesperean_pokedex.controller;
 
+import org.acme.shakesperean_pokedex.dto.PokedexResult;
 import org.acme.shakesperean_pokedex.dto.poke_api.PokemonSpecies;
-import org.acme.shakesperean_pokedex.service.PokeApiClient;
+import org.acme.shakesperean_pokedex.service.connector.PokeApiClient;
 import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -17,7 +17,7 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 @Disabled("to enable once controller implementation takes place")
-public class PokedexControllerTest {
+public class ShakespeareanPokedexControllerTest {
     //todo complete
 
     private static final String A_RESPONSE = "andrea";
@@ -25,14 +25,13 @@ public class PokedexControllerTest {
     private PokeApiClient pokeApiClient;
 
     @InjectMocks
-    private PokedexController pokedexController;
+    private ShakespeareanPokedexController shakespeareanPokedexController;
 
     @Test
-    @DisplayName("should return a hello message")
-    public void testHello() {
+    public void shouldReturnAPokedexResult() {
         when(pokeApiClient.getPokemonSpecies(anyString())).thenReturn(new PokemonSpecies());
 
-        String response = pokedexController.getDescription("");
+        PokedexResult response = shakespeareanPokedexController.getDescription("");
 
         verify(pokeApiClient, times(1)).getPokemonSpecies(anyString());
         assertEquals(A_RESPONSE, response);

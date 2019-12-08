@@ -1,8 +1,9 @@
-package org.acme.shakesperean_pokedex.service;
+package org.acme.shakesperean_pokedex.service.connector;
 
 import io.quarkus.test.junit.QuarkusTest;
 import org.acme.shakesperean_pokedex.dto.poke_api.PokemonSpecies;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import javax.inject.Inject;
@@ -26,6 +27,7 @@ public class PokeApiClientTest {
     PokeApiClient pokeApiClient;
 
     @Test
+    @DisplayName("Should get a pokemon species")
     public void shouldGetAPokemonDescription() {
         PokemonSpecies species = pokeApiClient.getPokemonSpecies(A_POKEMON_NAME);
 

@@ -1,4 +1,4 @@
-package org.acme.shakesperean_pokedex.service;
+package org.acme.shakesperean_pokedex.service.connector;
 
 import io.quarkus.test.junit.QuarkusTest;
 import org.acme.shakesperean_pokedex.dto.fun_translations.Translation;
@@ -23,7 +23,7 @@ class FunTranslationsApiClientTest {
     FunTranslationsApiClient funTranslationsApiClient;
 
     @Test
-    @DisplayName("should get a shakespearean translation")
+    @DisplayName("should get a text translated in Shakespeare's language")
     public void shouldGetAShakespeareanTranslation(){
         Translation translation = funTranslationsApiClient.translate(A_TEXT_IN_MODERN_ENGLISH_LANGUAGE);
 

@@ -1,4 +1,4 @@
-package org.acme.shakesperean_pokedex.service;
+package org.acme.shakesperean_pokedex.service.connector;
 
 import org.acme.shakesperean_pokedex.dto.fun_translations.Translation;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
