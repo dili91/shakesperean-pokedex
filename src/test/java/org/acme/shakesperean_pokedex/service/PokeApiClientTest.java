@@ -1,8 +1,7 @@
-package org.acme.service;
+package org.acme.shakesperean_pokedex.service;
 
 import io.quarkus.test.junit.QuarkusTest;
 import org.acme.shakesperean_pokedex.dto.poke_api.PokemonSpecies;
-import org.acme.shakesperean_pokedex.service.PokeApiClient;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 import org.junit.jupiter.api.Test;
 

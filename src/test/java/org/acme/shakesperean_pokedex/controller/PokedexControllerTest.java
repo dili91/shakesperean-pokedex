@@ -1,6 +1,5 @@
-package org.acme.controller;
+package org.acme.shakesperean_pokedex.controller;
 
-import org.acme.shakesperean_pokedex.controller.PokedexController;
 import org.acme.shakesperean_pokedex.dto.poke_api.PokemonSpecies;
 import org.acme.shakesperean_pokedex.service.PokeApiClient;
 import org.junit.jupiter.api.Disabled;
