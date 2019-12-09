@@ -21,13 +21,14 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class PokeApiClientTest {
 
     //dummies
-    private static final String POKE_API_ENDPOINT = "https://pokeapi.co";
     private static final String A_POKEMON_NAME = "charizard";
     private static final String A_POKEMON_COLOR = "red";
     private static final String A_POKEMON_DESCRIPTION = "Charizard flies around the sky in search of powerful opponents.\nIt breathes fire of such great heat that it melts anything.\nHowever, it never turns its fiery breath on any opponent\nweaker than itself.";
     private static final String A_DEFAULT_LANGUAGE = "en";
     private static final String A_DEFAULT_VERSION = "alpha-sapphire";
     private static final String A_NON_EXISTING_POKEMON_NAME = "a-non-existing-pokemon-name";
+
+    private static final String POKEMON_SPECIES_API_PATH = "/api/v2/pokemon-species/";
     private static final String A_POKE_API_JSON_RESPONSE = "{\n" +
             "   \"name\":\"charizard\",\n" +
             "   \"color\":{\n" +
@@ -86,7 +87,7 @@ public class PokeApiClientTest {
     public void shouldGetAPokemonDescription() {
         //given
         wireMockServer.stubFor(
-                get(urlPathMatching("/api/v2/pokemon-species/" + A_POKEMON_NAME))
+                get(urlPathMatching(POKEMON_SPECIES_API_PATH + A_POKEMON_NAME))
                         .willReturn(okJson(A_POKE_API_JSON_RESPONSE)));
 
         //when
@@ -110,7 +111,7 @@ public class PokeApiClientTest {
     public void shouldGetAWebServiceException() {
         //given
         wireMockServer.stubFor(
-                get(urlPathMatching("/api/v2/pokemon-species/" + A_NON_EXISTING_POKEMON_NAME))
+                get(urlPathMatching(POKEMON_SPECIES_API_PATH + A_NON_EXISTING_POKEMON_NAME))
                         .willReturn(notFound().withBody("Not Found")));
 
         //when
