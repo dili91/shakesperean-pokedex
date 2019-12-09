@@ -1,4 +1,4 @@
-package org.acme;
+package org.acme.shakesperean_pokedex;
 
 import io.quarkus.test.junit.NativeImageTest;
 import org.junit.jupiter.api.Disabled;

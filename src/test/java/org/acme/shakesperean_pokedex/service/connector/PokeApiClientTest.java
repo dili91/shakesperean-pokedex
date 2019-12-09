@@ -2,22 +2,23 @@ package org.acme.shakesperean_pokedex.service.connector;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
 import org.acme.shakesperean_pokedex.dto.poke_api.PokemonSpecies;
+import org.acme.shakesperean_pokedex.util.extension.MockApiExtension;
 import org.eclipse.microprofile.rest.client.RestClientBuilder;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import javax.ws.rs.WebApplicationException;
 import java.net.URI;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
-import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.options;
 import static javax.ws.rs.core.Response.Status.NOT_FOUND;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @DisplayName("Test fot PokeApi API connector")
+@ExtendWith(MockApiExtension.class)
 public class PokeApiClientTest {
 
     //dummies
@@ -27,7 +28,6 @@ public class PokeApiClientTest {
     private static final String A_DEFAULT_LANGUAGE = "en";
     private static final String A_DEFAULT_VERSION = "alpha-sapphire";
     private static final String A_NON_EXISTING_POKEMON_NAME = "a-non-existing-pokemon-name";
-
     private static final String POKEMON_SPECIES_API_PATH = "/api/v2/pokemon-species/";
     private static final String A_POKE_API_JSON_RESPONSE = "{\n" +
             "   \"name\":\"charizard\",\n" +
@@ -36,17 +36,6 @@ public class PokeApiClientTest {
             "      \"url\":\"https://pokeapi.co/api/v2/pokemon-color/8/\"\n" +
             "   },\n" +
             "   \"flavor_text_entries\":[\n" +
-            "      {\n" +
-            "         \"flavor_text\":\"強い　相手を　求めて　空を　飛び回る。\\nなんでも　溶かして　しまう　高熱の　炎を\\n自分より　弱いものに　向けることは　しない。\",\n" +
-            "         \"language\":{\n" +
-            "            \"name\":\"ja\",\n" +
-            "            \"url\":\"https://pokeapi.co/api/v2/language/11/\"\n" +
-            "         },\n" +
-            "         \"version\":{\n" +
-            "            \"name\":\"alpha-sapphire\",\n" +
-            "            \"url\":\"https://pokeapi.co/api/v2/version/26/\"\n" +
-            "         }\n" +
-            "      },\n" +
             "      {\n" +
             "         \"flavor_text\":\"Charizard flies around the sky in search of powerful opponents.\\nIt breathes fire of such great heat that it melts anything.\\nHowever, it never turns its fiery breath on any opponent\\nweaker than itself.\",\n" +
             "         \"language\":{\n" +
@@ -61,30 +50,19 @@ public class PokeApiClientTest {
             "   ]\n" +
             "}";
 
-    //mock server
-    private static WireMockServer wireMockServer;
-
     //system under test
     private static PokeApiClient testClient;
 
     @BeforeAll
-    static void setup() {
-        wireMockServer = new WireMockServer(options().dynamicPort());
-        wireMockServer.start();
-
+    static void setup(WireMockServer wireMockServer) {
         testClient = RestClientBuilder.newBuilder()
                 .baseUri(URI.create(wireMockServer.baseUrl()))
                 .build(PokeApiClient.class);
     }
 
-    @AfterAll
-    static void tearDown() {
-        wireMockServer.shutdown();
-    }
-
     @Test
     @DisplayName("Should get a pokemon species")
-    public void shouldGetAPokemonDescription() {
+    public void shouldGetAPokemonDescription(WireMockServer wireMockServer) {
         //given
         wireMockServer.stubFor(
                 get(urlPathMatching(POKEMON_SPECIES_API_PATH + A_POKEMON_NAME))
@@ -108,7 +86,7 @@ public class PokeApiClientTest {
 
     @Test
     @DisplayName("Should get an exception if pokemon species is not found")
-    public void shouldGetAWebServiceException() {
+    public void shouldGetAWebServiceException(WireMockServer wireMockServer) {
         //given
         wireMockServer.stubFor(
                 get(urlPathMatching(POKEMON_SPECIES_API_PATH + A_NON_EXISTING_POKEMON_NAME))
