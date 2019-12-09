@@ -13,6 +13,8 @@ import javax.ws.rs.core.MediaType;
 @Path("/api/v2")
 public interface PokeApiClient {
 
+    //todo basic request validation
+
     @GET
     @Path("/pokemon-species/{name}")
     @Produces(MediaType.APPLICATION_JSON)

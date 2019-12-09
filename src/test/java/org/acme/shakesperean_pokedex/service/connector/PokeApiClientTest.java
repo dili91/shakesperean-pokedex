@@ -14,6 +14,7 @@ import java.net.URI;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static javax.ws.rs.core.Response.Status.NOT_FOUND;
+import static javax.ws.rs.core.Response.Status.SERVICE_UNAVAILABLE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -28,6 +29,7 @@ public class PokeApiClientTest {
     private static final String A_DEFAULT_LANGUAGE = "en";
     private static final String A_DEFAULT_VERSION = "alpha-sapphire";
     private static final String A_NON_EXISTING_POKEMON_NAME = "a-non-existing-pokemon-name";
+
     private static final String POKEMON_SPECIES_API_PATH = "/api/v2/pokemon-species/";
     private static final String A_POKE_API_JSON_RESPONSE = "{\n" +
             "   \"name\":\"charizard\",\n" +
@@ -72,6 +74,7 @@ public class PokeApiClientTest {
         PokemonSpecies species = testClient.getPokemonSpecies(A_POKEMON_NAME);
 
         //then
+        verifyApiCalled(wireMockServer);
         assertEquals(A_POKEMON_NAME, species.getName());
         assertEquals(A_POKEMON_COLOR, species.getColor().getName());
         assertEquals(A_POKEMON_DESCRIPTION,
@@ -85,8 +88,8 @@ public class PokeApiClientTest {
     }
 
     @Test
-    @DisplayName("Should get an exception if pokemon species is not found")
-    public void shouldGetAWebServiceException(WireMockServer wireMockServer) {
+    @DisplayName("Should throw an exception if pokemon species is not found")
+    public void shouldThrowAWebServiceExceptionIfPokemonSpeciesNotFound(WireMockServer wireMockServer) {
         //given
         wireMockServer.stubFor(
                 get(urlPathMatching(POKEMON_SPECIES_API_PATH + A_NON_EXISTING_POKEMON_NAME))
@@ -97,6 +100,28 @@ public class PokeApiClientTest {
                 () -> testClient.getPokemonSpecies(A_NON_EXISTING_POKEMON_NAME));
 
         //then
+        verifyApiCalled(wireMockServer);
         assertEquals(NOT_FOUND, exception.getResponse().getStatusInfo().toEnum());
+    }
+
+    @Test
+    @DisplayName("should throw an exception if api is not reachable")
+    public void shouldThrowAWebServiceExceptionIfServerNotReachable(WireMockServer wireMockServer) {
+        //given
+        wireMockServer.stubFor(
+                get(urlPathMatching(POKEMON_SPECIES_API_PATH + A_POKEMON_NAME))
+                        .willReturn(serviceUnavailable()));
+
+        //when
+        WebApplicationException exception = assertThrows(WebApplicationException.class,
+                () -> testClient.getPokemonSpecies(A_POKEMON_NAME));
+
+        //then
+        verifyApiCalled(wireMockServer);
+        assertEquals(SERVICE_UNAVAILABLE, exception.getResponse().getStatusInfo().toEnum());
+    }
+
+    private void verifyApiCalled(WireMockServer wireMockServer) {
+        wireMockServer.verify(1, getRequestedFor(urlPathMatching(POKEMON_SPECIES_API_PATH + ".*")));
     }
 }
