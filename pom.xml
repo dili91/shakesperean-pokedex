@@ -99,6 +99,10 @@
                     <systemProperties>
                         <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
                     </systemProperties>
+                    <classpathDependencyExcludes>
+                        <!-- excluded on purpose to make restclient testable without a quarkus context -->
+                        <classpathDependencyExclude>io.smallrye:smallrye-opentracing</classpathDependencyExclude>
+                    </classpathDependencyExcludes>
                 </configuration>
             </plugin>
         </plugins>
