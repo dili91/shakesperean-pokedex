@@ -1,4 +1,4 @@
-package org.acme.shakesperean_pokedex.util.extension;
+package org.acme.shakesperean_pokedex.extension;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
 import org.junit.jupiter.api.extension.*;

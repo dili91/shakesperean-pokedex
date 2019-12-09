@@ -1,8 +1,9 @@
-package org.acme.shakesperean_pokedex.service.connector;
+package org.acme.shakesperean_pokedex.unit.service.connector;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
 import org.acme.shakesperean_pokedex.dto.fun_translations.Translation;
-import org.acme.shakesperean_pokedex.util.extension.MockApiExtension;
+import org.acme.shakesperean_pokedex.extension.MockApiExtension;
+import org.acme.shakesperean_pokedex.service.connector.FunTranslationsApiClient;
 import org.eclipse.microprofile.rest.client.RestClientBuilder;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;

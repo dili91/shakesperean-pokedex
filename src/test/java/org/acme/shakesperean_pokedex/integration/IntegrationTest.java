@@ -1,4 +1,4 @@
-package org.acme.shakesperean_pokedex;
+package org.acme.shakesperean_pokedex.integration;
 
 import io.quarkus.test.junit.QuarkusTest;
 import org.acme.shakesperean_pokedex.dto.PokedexResult;

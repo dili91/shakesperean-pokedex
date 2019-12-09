@@ -7,18 +7,19 @@ import org.acme.shakesperean_pokedex.service.connector.PokeApiClient;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 
 @ApplicationScoped
 public class ShakespeareanPokedexService {
 
-    @Inject
-    @RestClient
-    PokeApiClient pokeApiClient;
+    private final PokeApiClient pokeApiClient;
+    private final FunTranslationsApiClient funTranslationsApiClient;
 
-    @Inject
-    @RestClient
-    FunTranslationsApiClient funTranslationsApiClient;
+    public ShakespeareanPokedexService(
+            @RestClient PokeApiClient pokeApiClient,
+            @RestClient FunTranslationsApiClient funTranslationsApiClient) {
+        this.pokeApiClient = pokeApiClient;
+        this.funTranslationsApiClient = funTranslationsApiClient;
+    }
 
     public PokedexResult getDescription(String pokemonName) {
         //todo real impl
