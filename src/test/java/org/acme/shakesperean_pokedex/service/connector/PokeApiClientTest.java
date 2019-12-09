@@ -88,7 +88,7 @@ public class PokeApiClientTest {
     }
 
     @Test
-    @DisplayName("Should throw an exception if pokemon species is not found")
+    @DisplayName("Should throw an exception if a pokemon species is not found")
     public void shouldThrowAWebServiceExceptionIfPokemonSpeciesNotFound(WireMockServer wireMockServer) {
         //given
         wireMockServer.stubFor(
