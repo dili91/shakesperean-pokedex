@@ -19,7 +19,7 @@ import static javax.ws.rs.core.Response.Status.SERVICE_UNAVAILABLE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@DisplayName("Test fot PokeApi API connector")
+@DisplayName("Unit test fot PokeApi API connector")
 @ExtendWith(MockApiExtension.class)
 public class PokeApiClientTest {
 

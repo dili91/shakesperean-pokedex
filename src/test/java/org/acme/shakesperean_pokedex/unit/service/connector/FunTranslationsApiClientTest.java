@@ -18,7 +18,7 @@ import static javax.ws.rs.core.Response.Status.SERVICE_UNAVAILABLE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@DisplayName("Test fot FunTranslations API connector")
+@DisplayName("Unit test fot FunTranslations API connector")
 @ExtendWith(MockApiExtension.class)
 class FunTranslationsApiClientTest {
 
