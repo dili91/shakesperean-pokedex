@@ -102,14 +102,37 @@
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${surefire-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>default-test</id>
+                        <configuration>
+                            <excludedGroups>IntegrationTest</excludedGroups>
+                            <classpathDependencyExcludes>
+                                <!-- excluded on purpose to make restclient testable without a quarkus context -->
+                                <classpathDependencyExclude>io.smallrye:smallrye-opentracing
+                                </classpathDependencyExclude>
+                                <classpathDependencyExclude>io.quarkus:quarkus-smallrye-opentracing
+                                </classpathDependencyExclude>
+                            </classpathDependencyExcludes>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>integration-test</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>test</goal>
+                        </goals>
+                        <configuration>
+                            <includes>
+                                <groups>IntegrationTest</groups>
+                            </includes>
+                        </configuration>
+                    </execution>
+                </executions>
                 <configuration>
                     <systemProperties>
                         <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
                     </systemProperties>
-                    <classpathDependencyExcludes>
-                        <!-- excluded on purpose to make restclient testable without a quarkus context -->
-                        <classpathDependencyExclude>io.smallrye:smallrye-opentracing</classpathDependencyExclude>
-                    </classpathDependencyExcludes>
                 </configuration>
             </plugin>
         </plugins>
