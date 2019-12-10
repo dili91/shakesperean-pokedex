@@ -12,8 +12,6 @@ import javax.ws.rs.core.MediaType;
 @RegisterRestClient
 public interface FunTranslationsApiClient {
 
-    //todo basic request validation
-
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     Translation translate(@FormParam("text") @NotNull String text);
