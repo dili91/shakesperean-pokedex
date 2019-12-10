@@ -14,6 +14,8 @@ import javax.ws.rs.core.MediaType;
 @Path("/api/v2")
 public interface PokeApiClient {
 
+    //todo possibly: add circuitbreaker and a meaningful test
+
     @GET
     @Path("/pokemon-species/{name}")
     @ClientHeaderParam(name = "User-Agent", value = "MicroProfile Rest Client") //required to avoid 403 on PokeApi

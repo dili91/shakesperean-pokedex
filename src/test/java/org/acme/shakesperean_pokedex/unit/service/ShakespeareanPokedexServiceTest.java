@@ -91,7 +91,6 @@ class ShakespeareanPokedexServiceTest {
         pokemonSpecies.setName(name);
 
         FlavorTextEntries flavorTextEntries = new FlavorTextEntries();
-
         flavorTextEntries.setLanguage(language);
         flavorTextEntries.setFlavorText(description);
         flavorTextEntries.setVersion(version);
@@ -102,7 +101,7 @@ class ShakespeareanPokedexServiceTest {
 
     private Translation stubPositiveTranslation(String translatedText) {
         Translation translation = new Translation();
-        Contents contents = new Contents(translated, text, translation);
+        Contents contents = new Contents();
         contents.setTranslated(translatedText);
         translation.setContents(contents);
         return translation;
