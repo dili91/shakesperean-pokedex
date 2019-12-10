@@ -1,4 +1,4 @@
-package org.acme.shakesperean_pokedex.unit.service.connector;
+package org.acme.shakesperean_pokedex.integration.service.connector;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
 import org.acme.shakesperean_pokedex.dto.poke_api.PokemonSpecies;
@@ -7,6 +7,7 @@ import org.acme.shakesperean_pokedex.service.connector.PokeApiClient;
 import org.eclipse.microprofile.rest.client.RestClientBuilder;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -19,6 +20,7 @@ import static javax.ws.rs.core.Response.Status.SERVICE_UNAVAILABLE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+@Tag("IntegrationTest")
 @DisplayName("Unit test fot PokeApi API connector")
 @ExtendWith(MockApiExtension.class)
 public class PokeApiClientTest {

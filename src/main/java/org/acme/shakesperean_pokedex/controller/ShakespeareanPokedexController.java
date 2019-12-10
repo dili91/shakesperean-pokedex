@@ -6,20 +6,25 @@ import org.acme.shakesperean_pokedex.service.ShakespeareanPokedexService;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 
-@Path("/poke")
+@Path("/pokemon")
 public class ShakespeareanPokedexController {
 
+    private final ShakespeareanPokedexService shakespeareanPokedexService;
+
     @Inject
-    ShakespeareanPokedexService shakespeareanPokedexService;
+    public ShakespeareanPokedexController(ShakespeareanPokedexService shakespeareanPokedexService) {
+        this.shakespeareanPokedexService = shakespeareanPokedexService;
+    }
 
     @GET
+    @Path("/{pokemonName}")
     @Produces(MediaType.APPLICATION_JSON)
-    public PokedexResult getDescription(@QueryParam("name") String name) {
-        return shakespeareanPokedexService.getDescription(name);
+    public PokedexResult getDescription(@PathParam("pokemonName") String pokemonName) {
+        return shakespeareanPokedexService.getShakespeareanResult(pokemonName);
     }
 }
