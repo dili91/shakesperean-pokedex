@@ -1,13 +1,12 @@
 package org.acme.shakesperean_pokedex.unit.dto.builder;
 
 import org.acme.shakesperean_pokedex.dto.PokedexResult;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@Disabled
+@DisplayName("Pokedex result builder test")
 public class PokedexResultBuilderTest {
     private static final String A_POKEMON_NAME = "a-pokemon-name";
     private static final String A_POKEMON_DESCRIPTION = "a-pokemon-desc";

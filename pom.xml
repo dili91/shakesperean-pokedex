@@ -101,7 +101,9 @@
             <configuration>
               <excludes>
                 <exclude>*/integration/**</exclude>
+                <exclude>*/integration_native/**</exclude>
               </excludes>
+              <!-- todo if not required anymore  -->
               <classpathDependencyExcludes>
                 <classpathDependencyExclude>io.smallrye:smallrye-opentracing</classpathDependencyExclude>
                 <classpathDependencyExclude>io.quarkus:quarkus-smallrye-opentracing</classpathDependencyExclude>
@@ -117,6 +119,7 @@
             <configuration>
               <excludes>
                 <exclude>*/unit/**</exclude>
+                <exclude>*/integration_native/**</exclude>
               </excludes>
             </configuration>
           </execution>

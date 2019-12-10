@@ -1,11 +1,9 @@
-package org.acme.shakesperean_pokedex.integration;
+package org.acme.shakesperean_pokedex.integration_native;
 
 import io.quarkus.test.junit.NativeImageTest;
-import org.junit.jupiter.api.Disabled;
+import org.acme.shakesperean_pokedex.integration.IntegrationTest;
 
 @NativeImageTest
-//@Tag("IntegrationTest")
-@Disabled("todo enable again")
 public class IntegrationNativeTest extends IntegrationTest {
     // Execute the same tests but in native mode.
 }
