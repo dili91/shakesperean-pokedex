@@ -1,10 +1,11 @@
-package org.acme.shakesperean_pokedex.extension;
+package org.acme.shakesperean_pokedex.util;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
 import org.junit.jupiter.api.extension.*;
 
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.options;
 
+//todo: remove if not used
 public class MockApiExtension implements AfterEachCallback, BeforeAllCallback, AfterAllCallback, ParameterResolver {
 
     private WireMockServer wireMockServer;
@@ -17,6 +18,9 @@ public class MockApiExtension implements AfterEachCallback, BeforeAllCallback, A
     @Override
     public void beforeAll(ExtensionContext extensionContext) throws Exception {
         wireMockServer = new WireMockServer(options().dynamicPort());
+
+        wireMockServer.startRecording("https://pokeapi.co");
+
         wireMockServer.start();
     }
 

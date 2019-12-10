@@ -30,8 +30,7 @@ class ShakespeareanPokedexServiceTest {
     public void setup() {
         shakespeareanPokedexService = new ShakespeareanPokedexService(
                 this::stubPokemonSpecies,
-                this::stubTranslation
-        );
+                this::stubTranslation);
     }
 
     @Test

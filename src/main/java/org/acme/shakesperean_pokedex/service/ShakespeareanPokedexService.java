@@ -8,6 +8,7 @@ import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.validation.constraints.NotEmpty;
 
 @ApplicationScoped
 public class ShakespeareanPokedexService {
@@ -33,7 +34,7 @@ public class ShakespeareanPokedexService {
      * @param pokemonName the name of the Pokemon to look for
      * @return an object that consists of a name and description
      */
-    public PokedexResult getShakespeareanResult(String pokemonName) {
+    public PokedexResult getShakespeareanResult(@NotEmpty String pokemonName) {
         String originalDescription = pokeApiClient.getPokemonSpecies(pokemonName).getFlavorTextEntries().stream()
                 .filter(entry -> entry.getLanguage().getName().equalsIgnoreCase(A_DEFAULT_LANGUAGE))
                 .filter(entry -> entry.getVersion().getName().equalsIgnoreCase(A_DEFAULT_VERSION))

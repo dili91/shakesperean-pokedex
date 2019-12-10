@@ -2,10 +2,9 @@ package org.acme.shakesperean_pokedex.integration;
 
 import io.quarkus.test.junit.QuarkusTest;
 import org.acme.shakesperean_pokedex.dto.PokedexResult;
-import org.acme.shakesperean_pokedex.extension.MockApiExtension;
+import org.acme.shakesperean_pokedex.util.MockApiExtension;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -13,7 +12,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
 @QuarkusTest
-@Tag("IntegrationTest")
+//@Tag("IntegrationTest")
 @Disabled("todo: enabled this again")
 @ExtendWith(MockApiExtension.class)
 public class ShakespeareanPokedexControllerTest {
