@@ -104,10 +104,10 @@
                 <exclude>*/integration_native/**</exclude>
               </excludes>
               <!-- todo if not required anymore  -->
-              <classpathDependencyExcludes>
-                <classpathDependencyExclude>io.smallrye:smallrye-opentracing</classpathDependencyExclude>
-                <classpathDependencyExclude>io.quarkus:quarkus-smallrye-opentracing</classpathDependencyExclude>
-              </classpathDependencyExcludes>
+              <!--              <classpathDependencyExcludes>-->
+              <!--                <classpathDependencyExclude>io.smallrye:smallrye-opentracing</classpathDependencyExclude>-->
+              <!--                <classpathDependencyExclude>io.quarkus:quarkus-smallrye-opentracing</classpathDependencyExclude>-->
+              <!--              </classpathDependencyExcludes>-->
             </configuration>
           </execution>
           <execution>
