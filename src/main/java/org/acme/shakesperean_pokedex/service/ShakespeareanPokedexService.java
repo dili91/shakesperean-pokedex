@@ -17,7 +17,6 @@ import static org.acme.shakesperean_pokedex.enums.TranslationError.TRANSLATION_N
 @ApplicationScoped
 public class ShakespeareanPokedexService {
 
-    //todo make these configurable
     private static final String A_DEFAULT_LANGUAGE = "en";
     private static final String A_DEFAULT_VERSION = "alpha-sapphire";
 
@@ -47,7 +46,6 @@ public class ShakespeareanPokedexService {
                 .orElseThrow(() -> new TranslationException(DESCRIPTION_NOT_FOUND.value()))
                 .getFlavorText();
 
-        //todo: introduce Optional on dto level
         if (nullOrEmpty(originalDescription)) {
             throw new TranslationException(DESCRIPTION_NOT_FOUND.value());
         }
@@ -56,7 +54,6 @@ public class ShakespeareanPokedexService {
                 .getContents()
                 .getTranslated();
 
-        //todo: introduce Optional on dto level
         if (nullOrEmpty(translatedDescription)) {
             throw new TranslationException(TRANSLATION_NOT_AVAILABLE.value());
         }
@@ -67,7 +64,7 @@ public class ShakespeareanPokedexService {
                 .build();
     }
 
-    private boolean nullOrEmpty(String text) {
+    private static boolean nullOrEmpty(String text) {
         return text == null || text.isEmpty();
     }
 }
