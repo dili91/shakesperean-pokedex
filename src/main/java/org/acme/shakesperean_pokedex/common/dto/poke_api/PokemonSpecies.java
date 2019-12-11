@@ -1,5 +1,5 @@
 /* Copyright 2019 freecodeformat.com */
-package org.acme.shakesperean_pokedex.dto.poke_api;
+package org.acme.shakesperean_pokedex.common.dto.poke_api;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

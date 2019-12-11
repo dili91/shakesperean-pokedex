@@ -1,6 +1,6 @@
 package org.acme.shakesperean_pokedex.service.connector;
 
-import org.acme.shakesperean_pokedex.dto.fun_translations.Translation;
+import org.acme.shakesperean_pokedex.common.dto.fun_translations.Translation;
 import org.eclipse.microprofile.faulttolerance.CircuitBreaker;
 import org.eclipse.microprofile.faulttolerance.Timeout;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;

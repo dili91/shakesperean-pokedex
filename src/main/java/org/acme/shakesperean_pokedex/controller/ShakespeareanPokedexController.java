@@ -1,6 +1,6 @@
 package org.acme.shakesperean_pokedex.controller;
 
-import org.acme.shakesperean_pokedex.dto.PokedexResult;
+import org.acme.shakesperean_pokedex.common.dto.PokedexResult;
 import org.acme.shakesperean_pokedex.exception.TranslationException;
 import org.acme.shakesperean_pokedex.service.ShakespeareanPokedexService;
 

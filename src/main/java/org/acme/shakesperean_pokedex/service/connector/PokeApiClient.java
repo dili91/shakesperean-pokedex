@@ -1,6 +1,6 @@
 package org.acme.shakesperean_pokedex.service.connector;
 
-import org.acme.shakesperean_pokedex.dto.poke_api.PokemonSpecies;
+import org.acme.shakesperean_pokedex.common.dto.poke_api.PokemonSpecies;
 import org.eclipse.microprofile.faulttolerance.CircuitBreaker;
 import org.eclipse.microprofile.faulttolerance.Timeout;
 import org.eclipse.microprofile.rest.client.annotation.ClientHeaderParam;
@@ -18,8 +18,6 @@ import static org.acme.shakesperean_pokedex.common.RestClientConfiguration.*;
 @RegisterRestClient
 @Path("/api/v2")
 public interface PokeApiClient {
-
-    //todo possibly: add circuitbreaker and a meaningful test
 
     @GET
     @Path("/pokemon-species/{name}")

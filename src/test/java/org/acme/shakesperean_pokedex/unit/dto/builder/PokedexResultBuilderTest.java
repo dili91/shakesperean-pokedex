@@ -1,6 +1,6 @@
 package org.acme.shakesperean_pokedex.unit.dto.builder;
 
-import org.acme.shakesperean_pokedex.dto.PokedexResult;
+import org.acme.shakesperean_pokedex.common.dto.PokedexResult;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

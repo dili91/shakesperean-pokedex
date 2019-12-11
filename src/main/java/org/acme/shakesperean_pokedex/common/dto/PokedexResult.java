@@ -1,4 +1,4 @@
-package org.acme.shakesperean_pokedex.dto;
+package org.acme.shakesperean_pokedex.common.dto;
 
 public class PokedexResult {
     private String name;

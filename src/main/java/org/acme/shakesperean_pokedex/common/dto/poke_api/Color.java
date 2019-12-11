@@ -1,19 +1,11 @@
 /* Copyright 2019 freecodeformat.com */
-package org.acme.shakesperean_pokedex.dto.poke_api;
+package org.acme.shakesperean_pokedex.common.dto.poke_api;
 
 /* Time: 2019-12-08 16:59:3 @author freecodeformat.com @website http://www.freecodeformat.com/json2javabean.php */
-public class Names {
+public class Color {
 
-    private Language language;
     private String name;
-
-    public Language getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(Language language) {
-        this.language = language;
-    }
+    private String url;
 
     public String getName() {
         return name;
@@ -21,6 +13,14 @@ public class Names {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
 }

@@ -1,13 +1,13 @@
 package org.acme.shakesperean_pokedex.unit.service;
 
 import com.sun.tools.javac.util.List;
-import org.acme.shakesperean_pokedex.dto.PokedexResult;
-import org.acme.shakesperean_pokedex.dto.fun_translations.Contents;
-import org.acme.shakesperean_pokedex.dto.fun_translations.Translation;
-import org.acme.shakesperean_pokedex.dto.poke_api.FlavorTextEntries;
-import org.acme.shakesperean_pokedex.dto.poke_api.Language;
-import org.acme.shakesperean_pokedex.dto.poke_api.PokemonSpecies;
-import org.acme.shakesperean_pokedex.dto.poke_api.Version;
+import org.acme.shakesperean_pokedex.common.dto.PokedexResult;
+import org.acme.shakesperean_pokedex.common.dto.fun_translations.Contents;
+import org.acme.shakesperean_pokedex.common.dto.fun_translations.Translation;
+import org.acme.shakesperean_pokedex.common.dto.poke_api.FlavorTextEntries;
+import org.acme.shakesperean_pokedex.common.dto.poke_api.Language;
+import org.acme.shakesperean_pokedex.common.dto.poke_api.PokemonSpecies;
+import org.acme.shakesperean_pokedex.common.dto.poke_api.Version;
 import org.acme.shakesperean_pokedex.exception.TranslationException;
 import org.acme.shakesperean_pokedex.service.ShakespeareanPokedexService;
 import org.junit.jupiter.api.DisplayName;

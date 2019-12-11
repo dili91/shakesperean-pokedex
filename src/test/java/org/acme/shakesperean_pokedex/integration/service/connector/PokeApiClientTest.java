@@ -1,7 +1,7 @@
 package org.acme.shakesperean_pokedex.integration.service.connector;
 
 import io.quarkus.test.junit.QuarkusTest;
-import org.acme.shakesperean_pokedex.dto.poke_api.PokemonSpecies;
+import org.acme.shakesperean_pokedex.common.dto.poke_api.PokemonSpecies;
 import org.acme.shakesperean_pokedex.service.connector.PokeApiClient;
 import org.acme.shakesperean_pokedex.util.RemoteApiTest;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
@@ -16,7 +16,7 @@ import static javax.ws.rs.core.HttpHeaders.CONTENT_TYPE;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 import static javax.ws.rs.core.Response.Status.NOT_FOUND;
 import static javax.ws.rs.core.Response.Status.SERVICE_UNAVAILABLE;
-import static org.acme.shakesperean_pokedex.util.Configuration.POKEAPI_SPECIES_CHARIZARD_JSON_FILE;
+import static org.acme.shakesperean_pokedex.util.Configuration.POKEAPI_SPECIES_CHARIZARD_JSON_STUB_FILE;
 import static org.acme.shakesperean_pokedex.util.Configuration.POKE_API_SPECIES_PATH;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -45,7 +45,7 @@ public class PokeApiClientTest extends RemoteApiTest {
         mockServer.stubFor(get(urlPathMatching(POKE_API_SPECIES_PATH))
                 .willReturn(ok()
                         .withHeader(CONTENT_TYPE, APPLICATION_JSON)
-                        .withBodyFile(POKEAPI_SPECIES_CHARIZARD_JSON_FILE)
+                        .withBodyFile(POKEAPI_SPECIES_CHARIZARD_JSON_STUB_FILE)
                 )
         );
 

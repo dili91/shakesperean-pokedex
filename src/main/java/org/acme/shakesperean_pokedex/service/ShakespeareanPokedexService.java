@@ -1,7 +1,9 @@
 package org.acme.shakesperean_pokedex.service;
 
-import org.acme.shakesperean_pokedex.dto.PokedexResult;
-import org.acme.shakesperean_pokedex.dto.PokedexResult.Builder;
+import org.acme.shakesperean_pokedex.common.dto.PokedexResult;
+import org.acme.shakesperean_pokedex.common.dto.PokedexResult.Builder;
+import org.acme.shakesperean_pokedex.common.dto.poke_api.PokemonSpecies;
+import org.acme.shakesperean_pokedex.exception.RemoteApiException;
 import org.acme.shakesperean_pokedex.exception.TranslationException;
 import org.acme.shakesperean_pokedex.service.connector.FunTranslationsApiClient;
 import org.acme.shakesperean_pokedex.service.connector.PokeApiClient;
@@ -10,6 +12,8 @@ import org.eclipse.microprofile.rest.client.inject.RestClient;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.validation.constraints.NotEmpty;
+import javax.ws.rs.WebApplicationException;
+import java.util.function.Supplier;
 
 import static org.acme.shakesperean_pokedex.common.TranslationError.DESCRIPTION_NOT_FOUND;
 import static org.acme.shakesperean_pokedex.common.TranslationError.TRANSLATION_NOT_AVAILABLE;
@@ -31,6 +35,10 @@ public class ShakespeareanPokedexService {
         this.funTranslationsApiClient = funTranslationsApiClient;
     }
 
+    private static boolean nullOrEmpty(String text) {
+        return text == null || text.isEmpty();
+    }
+
     /**
      * Returns a Shakespearean-like Pokedex result for the given pokemon
      *
@@ -39,7 +47,10 @@ public class ShakespeareanPokedexService {
      * @throws TranslationException a translation exception
      */
     public PokedexResult getShakespeareanResult(@NotEmpty String pokemonName) throws TranslationException {
-        String originalDescription = pokeApiClient.getPokemonSpecies(pokemonName).getFlavorTextEntries().stream()
+
+        PokemonSpecies species = remoteApiCallWrapper(() -> pokeApiClient.getPokemonSpecies(pokemonName));
+
+        String originalDescription = species.getFlavorTextEntries().stream()
                 .filter(entry -> entry.getLanguage().getName().equalsIgnoreCase(A_DEFAULT_LANGUAGE))
                 .filter(entry -> entry.getVersion().getName().equalsIgnoreCase(A_DEFAULT_VERSION))
                 .findFirst()
@@ -64,7 +75,20 @@ public class ShakespeareanPokedexService {
                 .build();
     }
 
-    private static boolean nullOrEmpty(String text) {
-        return text == null || text.isEmpty();
+    /**
+     * Temporary wrapper around call to external clients to wrap exceptions of type WebApplicationException.
+     * In case of underlying WebApplicationException, exceptions are wrapped into a RemoteApiException instance
+     *
+     * @param remoteCall the supplier containing the remote call to execute
+     * @param <T>        the type of parameter returned by the remote call
+     * @return the result of the remote call
+     * @see "https://github.com/quarkusio/quarkus/issues/4031"
+     */
+    private <T> T remoteApiCallWrapper(Supplier<T> remoteCall) {
+        try {
+            return remoteCall.get();
+        } catch (WebApplicationException wae) {
+            throw new RemoteApiException(wae);
+        }
     }
 }
