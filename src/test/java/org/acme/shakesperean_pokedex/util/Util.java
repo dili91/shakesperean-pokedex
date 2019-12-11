@@ -7,6 +7,9 @@ import java.lang.reflect.Method;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static org.acme.shakesperean_pokedex.util.Configuration.FUN_TRANSLATIONS_API_JSON_STUBS_FOLDER;
+import static org.acme.shakesperean_pokedex.util.Configuration.POKE_API_JSON_STUBS_FOLDER;
+
 public class Util {
 
     private Util() {
@@ -30,5 +33,25 @@ public class Util {
                 + Stream.of(method.getParameterTypes()).map(Class::getName).collect(Collectors.joining(",", "(", ")"));
         HystrixCommandKey hystrixCommandKey = HystrixCommandKey.Factory.asKey(hystrixKey);
         return HystrixCircuitBreaker.Factory.getInstance(hystrixCommandKey);
+    }
+
+    /**
+     * Gets poke api JSON stub file full location
+     *
+     * @param fileName JSON filename
+     * @return the full location
+     */
+    public static String getPokeApiJsonStubLocation(String fileName) {
+        return POKE_API_JSON_STUBS_FOLDER + "/" + fileName;
+    }
+
+    /**
+     * Gets fun translations api JSON stub file full location
+     *
+     * @param fileName JSON filename
+     * @return the full location
+     */
+    public static String getFunTranslationsJsonStubLocation(String fileName) {
+        return FUN_TRANSLATIONS_API_JSON_STUBS_FOLDER + "/" + fileName;
     }
 }

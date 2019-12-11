@@ -24,6 +24,7 @@ import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 import static org.acme.shakesperean_pokedex.common.RestClientConfiguration.CIRCUIT_BREAKER_DELAY;
 import static org.acme.shakesperean_pokedex.common.RestClientConfiguration.CIRCUIT_BREAKER_REQUEST_VOLUME_THRESHOLD;
 import static org.acme.shakesperean_pokedex.util.Configuration.*;
+import static org.acme.shakesperean_pokedex.util.Util.getFunTranslationsJsonStubLocation;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("Rest client fault tolerance test")
@@ -80,18 +81,16 @@ public class RestClientFaultToleranceTest extends RemoteApiTest {
         //remote server initially down
         mockServer.stubFor(post(urlPathMatching(TRANSLATION_API_PATH)).willReturn(serviceUnavailable()));
 
-        //check that client gets only WebApplicationException exception for the first 10 calls
+        //check that circuit breaker gets opened after the first CIRCUIT_BREAKER_REQUEST_VOLUME_THRESHOLD calls
         range(0, CIRCUIT_BREAKER_REQUEST_VOLUME_THRESHOLD)
                 .forEach(index -> remoteCallWithSuppressedExceptions.run());
-
-        //check that client gets a circuit breaker exception, once the circuit is open
         assertTrue(getCircuitBreaker().isOpen());
 
         //remote server becomes available
         mockServer.stubFor(post(urlPathEqualTo(TRANSLATION_API_PATH))
                 .willReturn(ok()
                         .withHeader(CONTENT_TYPE, APPLICATION_JSON)
-                        .withBodyFile(TRANSLATION_API_SUN_IS_SHINING_JSON_STUB_FILE)
+                        .withBodyFile(getFunTranslationsJsonStubLocation(TRANSLATION_API_SUN_IS_SHINING_JSON_STUB_FILE))
                 )
         );
 

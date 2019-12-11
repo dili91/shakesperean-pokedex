@@ -18,6 +18,7 @@ import static javax.ws.rs.core.Response.Status.NOT_FOUND;
 import static javax.ws.rs.core.Response.Status.SERVICE_UNAVAILABLE;
 import static org.acme.shakesperean_pokedex.util.Configuration.POKEAPI_SPECIES_CHARIZARD_JSON_STUB_FILE;
 import static org.acme.shakesperean_pokedex.util.Configuration.POKE_API_SPECIES_PATH;
+import static org.acme.shakesperean_pokedex.util.Util.getPokeApiJsonStubLocation;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -45,7 +46,7 @@ public class PokeApiClientTest extends RemoteApiTest {
         mockServer.stubFor(get(urlPathMatching(POKE_API_SPECIES_PATH))
                 .willReturn(ok()
                         .withHeader(CONTENT_TYPE, APPLICATION_JSON)
-                        .withBodyFile(POKEAPI_SPECIES_CHARIZARD_JSON_STUB_FILE)
+                        .withBodyFile(getPokeApiJsonStubLocation(POKEAPI_SPECIES_CHARIZARD_JSON_STUB_FILE))
                 )
         );
 

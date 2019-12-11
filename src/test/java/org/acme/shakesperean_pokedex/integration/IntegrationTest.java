@@ -11,8 +11,11 @@ import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static io.restassured.RestAssured.given;
 import static javax.ws.rs.core.HttpHeaders.CONTENT_TYPE;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
-import static org.acme.shakesperean_pokedex.common.TranslationError.DESCRIPTION_NOT_FOUND;
+import static org.acme.shakesperean_pokedex.common.ErrorCode.*;
 import static org.acme.shakesperean_pokedex.util.Configuration.*;
+import static org.acme.shakesperean_pokedex.util.Util.getFunTranslationsJsonStubLocation;
+import static org.acme.shakesperean_pokedex.util.Util.getPokeApiJsonStubLocation;
+import static org.eclipse.jetty.http.HttpStatus.*;
 import static org.hamcrest.Matchers.equalTo;
 
 @QuarkusTest
@@ -33,19 +36,19 @@ public class IntegrationTest extends RemoteApiTest {
     @Test
     @DisplayName("should get 200 and a Shakespearean result in JSON format")
     public void shouldGetASuccessfulTranslation() {
-        stubSuccessfulResponses();
+        stubSuccessfulDataSet();
 
         given()
                 .pathParam("name", A_POKEMON_NAME)
                 .when().get("/pokemon/{name}")
                 .then()
-                .statusCode(200)
+                .statusCode(OK_200)
                 .body("name", equalTo(A_POKEDEX_RESULT.getName()))
                 .body("description", equalTo(A_POKEDEX_RESULT.getDescription()));
     }
 
     @Test
-    @DisplayName("should get 502 with details in case of external api error")
+    @DisplayName("should get 502 and an external api error")
     public void shouldGetAnExternalApiError() {
         stubExternalApiNotFoundError();
 
@@ -53,46 +56,63 @@ public class IntegrationTest extends RemoteApiTest {
                 .pathParam("name", A_POKEMON_NAME)
                 .when().get("/pokemon/{name}")
                 .then()
-                .statusCode(502)
-                .body("code", equalTo("external")) //todo
-                .body("message", equalTo(DESCRIPTION_NOT_FOUND.value()));
+                .statusCode(BAD_GATEWAY_502)
+                .body("code", equalTo(EXTERNAL.value()));
     }
 
     @Test
     @DisplayName("should get 500 and a translation error in JSON format")
     public void shouldGetATranslationError() {
-        stubDataWithMissingDescription();
+        stubIncompleteDataSet();
 
         given()
                 .pathParam("name", A_POKEMON_NAME)
                 .when().get("/pokemon/{name}")
                 .then()
-                .statusCode(500)
-                .body("code", equalTo("todo")) //todo
-                .body("message", equalTo(DESCRIPTION_NOT_FOUND.value()));
+                .statusCode(INTERNAL_SERVER_ERROR_500)
+                .body("code", equalTo(TRANSLATION.value()));
     }
 
-    private void stubSuccessfulResponses() {
+    @Test
+    @DisplayName("should get 500 and a generic error in JSON format")
+    public void shouldGetAGenericError() {
+        stubBrokenDataSet();
+
+        given()
+                .pathParam("name", A_POKEMON_NAME)
+                .when().get("/pokemon/{name}")
+                .then()
+                .statusCode(INTERNAL_SERVER_ERROR_500)
+                .body("code", equalTo(GENERIC.value()));
+    }
+
+    private void stubSuccessfulDataSet() {
         mockServer.stubFor(get(urlPathMatching(POKE_API_SPECIES_PATH))
                 .willReturn(ok()
                         .withHeader(CONTENT_TYPE, APPLICATION_JSON)
-                        .withBodyFile(getPokeApiJsonStub(POKEAPI_SPECIES_CHARIZARD_JSON_STUB_FILE))
+                        .withBodyFile(getPokeApiJsonStubLocation(POKEAPI_SPECIES_CHARIZARD_JSON_STUB_FILE))
                 )
         );
         mockServer.stubFor(post(urlPathEqualTo(TRANSLATION_API_PATH))
                 .willReturn(ok()
                         .withHeader(CONTENT_TYPE, APPLICATION_JSON)
-                        .withBodyFile(getFunTranslationsJsonStub(TRANSLATION_API_CHARIZARD_JSON_STUB_FILE))
+                        .withBodyFile(getFunTranslationsJsonStubLocation(TRANSLATION_API_CHARIZARD_JSON_STUB_FILE))
                 )
         );
     }
 
-    private void stubDataWithMissingDescription() {
+    private void stubIncompleteDataSet() {
         mockServer.stubFor(get(urlPathMatching(POKE_API_SPECIES_PATH))
                 .willReturn(ok()
                         .withHeader(CONTENT_TYPE, APPLICATION_JSON)
-                        .withBodyFile(getPokeApiJsonStub(POKEAPI_SPECIES_CHARIZARD_MISSING_DESCRIPTION_JSON_STUB_FILE))
+                        .withBodyFile(getPokeApiJsonStubLocation(POKEAPI_SPECIES_CHARIZARD_MISSING_DESCRIPTION_JSON_STUB_FILE))
                 )
+        );
+    }
+
+    private void stubBrokenDataSet() {
+        mockServer.stubFor(get(urlPathMatching(POKE_API_SPECIES_PATH))
+                .willReturn(ok())
         );
     }
 
@@ -102,13 +122,5 @@ public class IntegrationTest extends RemoteApiTest {
                         .withBody("Not Found")
                 )
         );
-    }
-
-    private String getPokeApiJsonStub(String fileName) {
-        return POKE_API_JSON_STUBS_FOLDER + "/" + fileName;
-    }
-
-    private String getFunTranslationsJsonStub(String fileName) {
-        return FUN_TRANSLATIONS_API_JSON_STUBS_FOLDER + "/" + fileName;
     }
 }

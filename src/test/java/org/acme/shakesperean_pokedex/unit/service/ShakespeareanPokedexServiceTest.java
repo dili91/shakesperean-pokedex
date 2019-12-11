@@ -13,8 +13,6 @@ import org.acme.shakesperean_pokedex.service.ShakespeareanPokedexService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.acme.shakesperean_pokedex.common.TranslationError.DESCRIPTION_NOT_FOUND;
-import static org.acme.shakesperean_pokedex.common.TranslationError.TRANSLATION_NOT_AVAILABLE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -57,7 +55,6 @@ class ShakespeareanPokedexServiceTest {
         Throwable exception = assertThrows(TranslationException.class, ()
                 -> shakespeareanPokedexService.getShakespeareanResult(A_POKEMON_NAME)
         );
-        assertEquals(DESCRIPTION_NOT_FOUND.value(), exception.getMessage());
     }
 
     @Test
@@ -73,7 +70,6 @@ class ShakespeareanPokedexServiceTest {
         Throwable exception = assertThrows(TranslationException.class, ()
                 -> shakespeareanPokedexService.getShakespeareanResult(A_POKEMON_NAME)
         );
-        assertEquals(TRANSLATION_NOT_AVAILABLE.value(), exception.getMessage());
     }
 
     private PokemonSpecies stubPositivePokeApiResult(String name, String description) {

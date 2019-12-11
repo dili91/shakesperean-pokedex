@@ -15,14 +15,14 @@ import javax.validation.constraints.NotEmpty;
 import javax.ws.rs.WebApplicationException;
 import java.util.function.Supplier;
 
-import static org.acme.shakesperean_pokedex.common.TranslationError.DESCRIPTION_NOT_FOUND;
-import static org.acme.shakesperean_pokedex.common.TranslationError.TRANSLATION_NOT_AVAILABLE;
-
 @ApplicationScoped
 public class ShakespeareanPokedexService {
 
     private static final String A_DEFAULT_LANGUAGE = "en";
     private static final String A_DEFAULT_VERSION = "alpha-sapphire";
+
+    private static final String DESCRIPTION_NOT_FOUND_ERR_MSG = "Description not found for the selected Pokemon";
+    private static final String TRANSLATION_NOT_AVAILABLE_ERR_MSG = "Translation not available for the selected Pokemon";
 
     private final PokeApiClient pokeApiClient;
     private final FunTranslationsApiClient funTranslationsApiClient;
@@ -54,11 +54,11 @@ public class ShakespeareanPokedexService {
                 .filter(entry -> entry.getLanguage().getName().equalsIgnoreCase(A_DEFAULT_LANGUAGE))
                 .filter(entry -> entry.getVersion().getName().equalsIgnoreCase(A_DEFAULT_VERSION))
                 .findFirst()
-                .orElseThrow(() -> new TranslationException(DESCRIPTION_NOT_FOUND.value()))
+                .orElseThrow(() -> new TranslationException(DESCRIPTION_NOT_FOUND_ERR_MSG))
                 .getFlavorText();
 
         if (nullOrEmpty(originalDescription)) {
-            throw new TranslationException(DESCRIPTION_NOT_FOUND.value());
+            throw new TranslationException(DESCRIPTION_NOT_FOUND_ERR_MSG);
         }
 
         String translatedDescription = funTranslationsApiClient.translate(originalDescription)
@@ -66,7 +66,7 @@ public class ShakespeareanPokedexService {
                 .getTranslated();
 
         if (nullOrEmpty(translatedDescription)) {
-            throw new TranslationException(TRANSLATION_NOT_AVAILABLE.value());
+            throw new TranslationException(TRANSLATION_NOT_AVAILABLE_ERR_MSG);
         }
 
         return Builder.aPokedexResult()

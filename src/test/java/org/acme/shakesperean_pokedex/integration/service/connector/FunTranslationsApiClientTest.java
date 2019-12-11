@@ -17,6 +17,7 @@ import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 import static javax.ws.rs.core.Response.Status.TOO_MANY_REQUESTS;
 import static org.acme.shakesperean_pokedex.util.Configuration.TRANSLATION_API_PATH;
 import static org.acme.shakesperean_pokedex.util.Configuration.TRANSLATION_API_SUN_IS_SHINING_JSON_STUB_FILE;
+import static org.acme.shakesperean_pokedex.util.Util.getFunTranslationsJsonStubLocation;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -40,7 +41,7 @@ class FunTranslationsApiClientTest extends RemoteApiTest {
         mockServer.stubFor(post(urlPathEqualTo(TRANSLATION_API_PATH))
                 .willReturn(ok()
                         .withHeader(CONTENT_TYPE, APPLICATION_JSON)
-                        .withBodyFile(TRANSLATION_API_SUN_IS_SHINING_JSON_STUB_FILE)
+                        .withBodyFile(getFunTranslationsJsonStubLocation(TRANSLATION_API_SUN_IS_SHINING_JSON_STUB_FILE))
                 )
         );
 
