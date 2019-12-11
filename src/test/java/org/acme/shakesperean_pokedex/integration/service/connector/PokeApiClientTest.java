@@ -21,7 +21,7 @@ import static org.acme.shakesperean_pokedex.util.Configuration.POKE_API_SPECIES_
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@DisplayName("Integration test fot PokeApi API connector")
+@DisplayName("Integration test for PokeApi API connector")
 @QuarkusTest
 public class PokeApiClientTest extends RemoteApiTest {
 
@@ -33,14 +33,13 @@ public class PokeApiClientTest extends RemoteApiTest {
     private static final String A_DEFAULT_VERSION = "alpha-sapphire";
     private static final String A_NON_EXISTING_POKEMON_NAME = "a-non-existing-pokemon-name";
 
-
     //system under test
     @Inject
     @RestClient
     PokeApiClient pokeApiClient;
 
     @Test
-    @DisplayName("Should get a pokemon species")
+    @DisplayName("should get a pokemon species")
     public void shouldGetAPokemonDescription() {
         //given
         mockServer.stubFor(get(urlPathMatching(POKE_API_SPECIES_PATH))
@@ -67,34 +66,28 @@ public class PokeApiClientTest extends RemoteApiTest {
     }
 
     @Test
-    @DisplayName("Should throw an exception if a pokemon species is not found")
+    @DisplayName("should throw an exception if a pokemon species is not found")
     public void shouldThrowAWebServiceExceptionIfPokemonSpeciesNotFound() {
         //given
         mockServer.stubFor(get(urlPathMatching(POKE_API_SPECIES_PATH))
                 .willReturn(notFound().withBody("Not found")));
 
-        //when
+        //expect
         WebApplicationException exception = assertThrows(WebApplicationException.class,
                 () -> pokeApiClient.getPokemonSpecies(A_NON_EXISTING_POKEMON_NAME));
-
-        //then
         assertEquals(NOT_FOUND, exception.getResponse().getStatusInfo().toEnum());
     }
 
     @Test
-    @DisplayName("Should throw an exception if service is unavailable")
+    @DisplayName("should throw an exception if service is unavailable")
     public void shouldThrowAWebServiceExceptionIfServiceIsUnavailable() {
         //given
         mockServer.stubFor(get(anyUrl())
                 .willReturn(serviceUnavailable()));
 
-        //when
+        //expect
         WebApplicationException exception = assertThrows(WebApplicationException.class,
                 () -> pokeApiClient.getPokemonSpecies(A_POKEMON_NAME));
-
-        //then
         assertEquals(SERVICE_UNAVAILABLE, exception.getResponse().getStatusInfo().toEnum());
     }
-
-
 }

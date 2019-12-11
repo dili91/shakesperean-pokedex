@@ -10,13 +10,13 @@ import org.acme.shakesperean_pokedex.dto.poke_api.PokemonSpecies;
 import org.acme.shakesperean_pokedex.dto.poke_api.Version;
 import org.acme.shakesperean_pokedex.exception.TranslationException;
 import org.acme.shakesperean_pokedex.service.ShakespeareanPokedexService;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.acme.shakesperean_pokedex.enums.TranslationError.DESCRIPTION_NOT_FOUND;
-import static org.acme.shakesperean_pokedex.enums.TranslationError.TRANSLATION_NOT_AVAILABLE;
+import static org.acme.shakesperean_pokedex.common.TranslationError.DESCRIPTION_NOT_FOUND;
+import static org.acme.shakesperean_pokedex.common.TranslationError.TRANSLATION_NOT_AVAILABLE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @DisplayName("Unit test for ShakespeareanPokedex Service ")
 class ShakespeareanPokedexServiceTest {
@@ -53,12 +53,10 @@ class ShakespeareanPokedexServiceTest {
                 text -> this.stubPositiveTranslation(A_POKEMON_TRANSLATED_DESCRIPTION)
         );
 
-        //when
-        Throwable exception = Assertions.assertThrows(TranslationException.class, ()
+        //expect
+        Throwable exception = assertThrows(TranslationException.class, ()
                 -> shakespeareanPokedexService.getShakespeareanResult(A_POKEMON_NAME)
         );
-
-        //then
         assertEquals(DESCRIPTION_NOT_FOUND.value(), exception.getMessage());
     }
 
@@ -71,12 +69,10 @@ class ShakespeareanPokedexServiceTest {
                 text -> this.stubPositiveTranslation("")
         );
 
-        //when
-        Throwable exception = Assertions.assertThrows(TranslationException.class, ()
+        //expect
+        Throwable exception = assertThrows(TranslationException.class, ()
                 -> shakespeareanPokedexService.getShakespeareanResult(A_POKEMON_NAME)
         );
-
-        //then
         assertEquals(TRANSLATION_NOT_AVAILABLE.value(), exception.getMessage());
     }
 

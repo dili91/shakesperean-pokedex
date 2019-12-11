@@ -11,6 +11,8 @@ public class Configuration {
     public static final String TRANSLATION_API_SUN_IS_SHINING_JSON_FILE = "translation_api_shakespeare.sun_is_shining.json";
     public static final String TRANSLATION_API_CHARIZARD_JSON_FILE = "translation_api_shakespeare.charizard.json";
 
+    public static final int RESPONSE_DELAYS_MS = 10000;
+
     private Configuration() {
         //util class
     }

@@ -1,4 +1,4 @@
-package org.acme.shakesperean_pokedex.enums;
+package org.acme.shakesperean_pokedex.common;
 
 public enum TranslationError {
     DESCRIPTION_NOT_FOUND("Description not found for the selected Pokemon"),

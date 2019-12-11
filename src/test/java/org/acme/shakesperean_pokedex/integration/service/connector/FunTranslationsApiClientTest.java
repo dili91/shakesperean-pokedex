@@ -20,14 +20,13 @@ import static org.acme.shakesperean_pokedex.util.Configuration.TRANSLATION_API_S
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@DisplayName("Integration test fot FunTranslations API connector")
+@DisplayName("Integration test for FunTranslations API connector")
 @QuarkusTest
 class FunTranslationsApiClientTest extends RemoteApiTest {
 
     //dummies
     private static final String A_TEXT_IN_MODERN_ENGLISH_LANGUAGE = "today sun is shining";
     private static final String A_TEXT_IN_SHAKESPEAREAN_LANGUAGE = "The present day travelling lamp is shining";
-
 
     //system under test
     @Inject
@@ -61,11 +60,9 @@ class FunTranslationsApiClientTest extends RemoteApiTest {
                 .willReturn(status(429))
         );
 
-        //when
+        //expet
         WebApplicationException exception = assertThrows(WebApplicationException.class,
                 () -> funTranslationsApiClient.translate(A_TEXT_IN_MODERN_ENGLISH_LANGUAGE));
-
-        //then
         assertEquals(TOO_MANY_REQUESTS, exception.getResponse().getStatusInfo().toEnum());
     }
 }

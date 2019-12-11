@@ -11,8 +11,8 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.validation.constraints.NotEmpty;
 
-import static org.acme.shakesperean_pokedex.enums.TranslationError.DESCRIPTION_NOT_FOUND;
-import static org.acme.shakesperean_pokedex.enums.TranslationError.TRANSLATION_NOT_AVAILABLE;
+import static org.acme.shakesperean_pokedex.common.TranslationError.DESCRIPTION_NOT_FOUND;
+import static org.acme.shakesperean_pokedex.common.TranslationError.TRANSLATION_NOT_AVAILABLE;
 
 @ApplicationScoped
 public class ShakespeareanPokedexService {
