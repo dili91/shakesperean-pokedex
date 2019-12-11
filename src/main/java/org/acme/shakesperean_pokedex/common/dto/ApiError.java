@@ -2,7 +2,6 @@ package org.acme.shakesperean_pokedex.common.dto;
 
 import java.util.Optional;
 
-//todo tests
 public class ApiError {
 
     private final String code;

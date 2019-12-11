@@ -12,8 +12,6 @@ import static javax.ws.rs.core.Response.status;
 @Provider
 public class GenericExceptionMapper implements ExceptionMapper<Exception> {
 
-    //todo test
-
     public static final String ERR_CODE = "E:GENERIC";
 
     @Override

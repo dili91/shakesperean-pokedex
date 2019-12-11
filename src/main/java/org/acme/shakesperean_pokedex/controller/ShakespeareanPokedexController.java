@@ -15,8 +15,6 @@ import javax.ws.rs.core.MediaType;
 @Path("/pokemon")
 public class ShakespeareanPokedexController {
 
-    //todo rest exception handler for 404, validation, others....
-
     private final ShakespeareanPokedexService shakespeareanPokedexService;
 
     @Inject

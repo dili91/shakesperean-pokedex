@@ -13,8 +13,6 @@ import static javax.ws.rs.core.Response.status;
 @Provider
 public class RemoteApiExceptionMapper implements ExceptionMapper<RemoteApiException> {
 
-    //todo test
-
     public static final String ERR_CODE = "E:EXTERNAL";
 
     @Override

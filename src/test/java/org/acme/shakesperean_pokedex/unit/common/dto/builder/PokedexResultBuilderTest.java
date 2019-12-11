@@ -1,4 +1,4 @@
-package org.acme.shakesperean_pokedex.unit.dto.builder;
+package org.acme.shakesperean_pokedex.unit.common.dto.builder;
 
 import org.acme.shakesperean_pokedex.common.dto.PokedexResult;
 import org.junit.jupiter.api.DisplayName;

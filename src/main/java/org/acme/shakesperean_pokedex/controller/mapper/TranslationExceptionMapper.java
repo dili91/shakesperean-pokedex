@@ -13,8 +13,6 @@ import static javax.ws.rs.core.Response.status;
 @Provider
 public class TranslationExceptionMapper implements ExceptionMapper<TranslationException> {
 
-    //todo test
-
     public static final String ERR_CODE = "E:TRANSLATION";
 
     @Override
