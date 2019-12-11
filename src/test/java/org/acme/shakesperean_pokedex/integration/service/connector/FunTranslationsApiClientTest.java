@@ -60,7 +60,7 @@ class FunTranslationsApiClientTest extends RemoteApiTest {
                 .willReturn(status(429))
         );
 
-        //expet
+        //expect
         WebApplicationException exception = assertThrows(WebApplicationException.class,
                 () -> funTranslationsApiClient.translate(A_TEXT_IN_MODERN_ENGLISH_LANGUAGE));
         assertEquals(TOO_MANY_REQUESTS, exception.getResponse().getStatusInfo().toEnum());

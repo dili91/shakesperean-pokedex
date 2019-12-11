@@ -6,7 +6,6 @@ import org.eclipse.microprofile.faulttolerance.Timeout;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 import org.jboss.resteasy.annotations.jaxrs.FormParam;
 
-import javax.validation.constraints.NotNull;
 import javax.ws.rs.POST;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -24,5 +23,5 @@ public interface FunTranslationsApiClient {
             requestVolumeThreshold = CIRCUIT_BREAKER_REQUEST_VOLUME_THRESHOLD,
             delay = CIRCUIT_BREAKER_DELAY
     )
-    Translation translate(@FormParam("text") @NotNull String text);
+    Translation translate(@FormParam("text") String text);
 }
