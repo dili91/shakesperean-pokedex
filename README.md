@@ -22,17 +22,53 @@ In order to run the project the following dependencies are required:
 - optionally [GraalVM](https://www.graalvm.org/) for native image build and execution
 - optionally [Docker](https://docs.docker.com/) to build project images and run the containerized version of this project
 
+### Maven wrapper
 The simplest way to run the project is to use the [Maven](https://maven.apache.org/) wrapper bundled in this project. 
 Run the following from the root directory:
 
 `./mvnw compile quarkus:dev`
 
+### Java execution
 Another possible approach is to build the application jar first and then run it using java lib.
 
 ```
 ./mvnw compile 
 java -jar target/shakespearean-pokedex-1.0.0-SNAPSHOT-runner.jar
 ```
+
+### Docker container execution
+It is possible to package the application and run it as a Docker container.
+
+First we need to package the project and create its docker image.
+
+Package the app: 
+
+`mvn package`
+
+Then, build the Docker image with:
+
+`docker build -f src/main/docker/Dockerfile.jvm -t quarkus/shakespearean-pokedex-jvm .`
+
+Finally run the container using:
+
+`docker run -i --rm -p 8080:8080 quarkus/shakespearean-pokedex-jvm`
+
+### Native image execution
+One of the reasons I wanted to use Quarkus for this project is because of its built-in support for native image creation.
+The main advantage of it is that it leverages AOT compilation and almost remove the startup time of the application. 
+To do so GraalVM [should be properly configured](https://quarkus.io/guides/building-native-image#configuring-graalvm).
+
+To create a *native image* run the following ():
+
+`./mvnw package -Pnative`
+
+Note: this might take few minutes.
+
+To run it just:
+`./target/shakespearean-pokedex-1.0.0-SNAPSHOT-runner`
+
+Have a look at application startup time:
+
 
 ## OpenAPI documentation
 SwaggerUI is available at /swagger-ui path.
@@ -71,18 +107,22 @@ To run native tests only:
 
 `./mvnw verify -Pnative -Dskip.unit.test=true -Dskip.integration.test=true`
 
-## Extras
-### Opentracing
-//todo: improve
+Quick manual tests could be run from /swagger-ui page or with curl 
 
-To start the tracing system to collect and display the captured traces:
+`curl localhost:8080/pokemon/charizard` 
+
+## Extra features
+
+### Opentracing
+
+[SmallRye Open tracing](https://github.com/smallrye/smallrye-opentracing) library is used to provide metrics about internal and external services execution. 
+
+To start collecting the captured traces we can use a docker container:
 
 `docker run -e COLLECTOR_ZIPKIN_HTTP_PORT=9411 -p 5775:5775/udp -p 6831:6831/udp -p 6832:6832/udp -p 5778:5778 -p 16686:16686 -p 14268:14268 -p 9411:9411 jaegertracing/all-in-one:latest`
 
-UI is available at http://localhost:16686/search
+To see collected traces open http://localhost:16686/search in your browser
 
-### Docker
-//todo
+### Continuous integration
 
-### Native image
-//todo
+//todo setup CircleCI build
