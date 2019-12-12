@@ -189,4 +189,5 @@
       </properties>
     </profile>
   </profiles>
+  <!-- todo: improve add code coverage reports  -->
 </project>
