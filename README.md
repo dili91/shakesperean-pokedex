@@ -79,7 +79,7 @@ Have a look at application startup time:
 
 
 ## OpenAPI documentation
-SwaggerUI is available at /swagger-ui path.
+SwaggerUI is available at **/swagger-ui** path.
 
 ## Tests
 Unit and integration tests are defined into **src/test** directory. 
@@ -93,8 +93,8 @@ or tests relying Quarkus application context (see tests marked with _@QuarkusTes
 tests are included here as well.  
 finally **integration_native** package include a test to be executed against the native image of this project.
 
-Execution phases are defined with the help of (surefire)[https://maven.apache.org/surefire/maven-surefire-plugin/] and 
-(failsafe)[https://maven.apache.org/surefire/maven-failsafe-plugin/] maven plugins. 
+Execution phases are defined with the help of [surefire](https://maven.apache.org/surefire/maven-surefire-plugin/) and 
+[failsafe](https://maven.apache.org/surefire/maven-failsafe-plugin/) maven plugins. 
 If interested, see pom.xml configuration for further details.
 
 To run unit tests: 
