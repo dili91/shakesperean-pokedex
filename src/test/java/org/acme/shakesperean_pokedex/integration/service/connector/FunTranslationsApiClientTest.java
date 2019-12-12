@@ -21,6 +21,9 @@ import static org.acme.shakesperean_pokedex.util.Util.getFunTranslationsJsonStub
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+/**
+ * todo: improve this making it completely Quarkus independent. I tried to build a test implementation this client but I got CDI errors
+ */
 @DisplayName("Integration test for FunTranslations API connector")
 @QuarkusTest
 class FunTranslationsApiClientTest extends RemoteApiTest {
