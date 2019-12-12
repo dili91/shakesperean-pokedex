@@ -4,11 +4,15 @@ A [Quarkus](https://quarkus.io/) based REST API that, given a Pokemon name, retu
  Shakespearean style.
 
 ## Technology stack
-The project is built on top of Quarkus framework. The reason I did so is that it comes with a wide range of open source
-and opinionated libraries and useful extensions. MicroProfile, SmallRye fault tolerance, Open tracing, OpenAPI libraries
-are just few of them I used in this project.
-Moreover it provides built-in support for testing, containerized applications creation, Kubernetes deployment and native 
-images leveraging [GraalVM](https://www.graalvm.org/) features.
+The project is built on top of Quarkus framework. 
+
+The reason I did so is that it comes with a wide range of open source and opinionated libraries and useful extensions.
+[MicroProfile](https://microprofile.io/), [SmallRye Fault tolerance](https://github.com/smallrye/smallrye-fault-tolerance), 
+[Open tracing](https://github.com/smallrye/smallrye-opentracing), [OpenAPI](https://github.com/smallrye/smallrye-open-api) 
+libraries are just few of them I used in this project.
+
+Moreover it provides built-in support for testing, containerized applications creation, [Kubernetes](https://kubernetes.io/) 
+deployment and native images leveraging [GraalVM](https://www.graalvm.org/) features.
 Finally I also wanted to explore Quarkus capabilities with respect to other well known Java frameworks like Springboot.
 I also enjoyed Quarkus live-reloading feature which is not so common while developing in Java.
 
@@ -18,7 +22,7 @@ In order to run the project the following dependencies are required:
 - optionally [GraalVM](https://www.graalvm.org/) for native image build and execution
 - optionally [Docker](https://docs.docker.com/) to build project images and run the containerized version of this project
 
-The simplest way to run the project is to use the [Maven wrapper](https://maven.apache.org/) bundled in this project. 
+The simplest way to run the project is to use the [Maven](https://maven.apache.org/) wrapper bundled in this project. 
 Run the following from the root directory:
 
 `./mvnw compile quarkus:dev`
@@ -29,6 +33,9 @@ Another possible approach is to build the application jar first and then run it 
 ./mvnw compile 
 java -jar target/shakespearean-pokedex-1.0.0-SNAPSHOT-runner.jar
 ```
+
+## OpenAPI documentation
+SwaggerUI is available at /swagger-ui path.
 
 ## Tests
 Unit and integration tests are defined into src/test/java directory. Whenever possible I did not rely on Quarkus application
