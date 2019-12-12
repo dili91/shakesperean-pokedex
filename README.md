@@ -88,10 +88,12 @@ I structured tests in **unit**, **integration** and **integration_native** packa
  to split their execution in isolated phases.
 
 **unit** package contains pure unit tests. Amongst those builders, mappers and main service tests are defined.
+
 **integration** package contains integration tests, that is either tests which involved external services (stubbed with [Wiremock](http://wiremock.org/))
 or tests relying Quarkus application context (see tests marked with _@QuarkusTest_ annotation). REST endpoint and fault tolerance
-tests are included here as well.  
-finally **integration_native** package include a test to be executed against the native image of this project.
+tests are included here as well.
+  
+Finally **integration_native** package include a test to be executed against the native image of this project.
 
 Execution phases are defined with the help of [surefire](https://maven.apache.org/surefire/maven-surefire-plugin/) and 
 [failsafe](https://maven.apache.org/surefire/maven-failsafe-plugin/) maven plugins. 
