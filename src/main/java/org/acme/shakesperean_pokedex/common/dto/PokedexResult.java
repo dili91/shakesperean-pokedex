@@ -1,8 +1,16 @@
 package org.acme.shakesperean_pokedex.common.dto;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
+@JsonDeserialize(builder = PokedexResult.Builder.class)
 public class PokedexResult {
-    private String name;
-    private String description;
+    private final String name;
+    private final String description;
+
+    public PokedexResult(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
 
     public String getName() {
         return name;
@@ -34,10 +42,7 @@ public class PokedexResult {
         }
 
         public PokedexResult build() {
-            PokedexResult pokedexResult = new PokedexResult();
-            pokedexResult.name = this.name;
-            pokedexResult.description = this.description;
-            return pokedexResult;
+            return new PokedexResult(name, description);
         }
     }
 }
