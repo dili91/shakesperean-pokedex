@@ -1,17 +1,20 @@
 package org.acme.shakesperean_pokedex.common.dto;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 import java.util.Optional;
 
+@JsonDeserialize(builder = ApiError.Builder.class)
 public class ApiError {
 
     private final String code;
     private final Optional<String> externalCode;
     private final Optional<String> message;
 
-    public ApiError(String code, Optional<String> externalCode, Optional<String> message) {
+    public ApiError(String code, String externalCode, String message) {
         this.code = code;
-        this.externalCode = externalCode;
-        this.message = message;
+        this.externalCode = Optional.ofNullable(externalCode);
+        this.message = Optional.ofNullable(message);
     }
 
     public String getCode() {
@@ -26,11 +29,10 @@ public class ApiError {
         return message;
     }
 
-
     public static final class Builder {
         private String code;
-        private Optional<String> externalCode;
-        private Optional<String> message;
+        private String externalCode;
+        private String message;
 
         private Builder() {
         }
@@ -45,12 +47,12 @@ public class ApiError {
         }
 
         public Builder withExternalCode(String externalCode) {
-            this.externalCode = Optional.of(externalCode);
+            this.externalCode = externalCode;
             return this;
         }
 
         public Builder withMessage(String message) {
-            this.message = Optional.of(message);
+            this.message = message;
             return this;
         }
 
