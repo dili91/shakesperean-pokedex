@@ -10,6 +10,12 @@ import javax.ws.rs.ext.Provider;
 
 import static javax.ws.rs.core.Response.status;
 
+/**
+ * Mapper that intercepts exceptions of type RemoteApiException
+ * Currently required due to a Quarkus open issue
+ *
+ * @see "https://github.com/quarkusio/quarkus/issues/4031"
+ */
 @Provider
 public class RemoteApiExceptionMapper implements ExceptionMapper<RemoteApiException> {
 

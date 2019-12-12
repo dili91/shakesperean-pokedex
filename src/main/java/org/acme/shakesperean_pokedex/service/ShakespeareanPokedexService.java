@@ -15,6 +15,9 @@ import javax.validation.constraints.NotEmpty;
 import javax.ws.rs.WebApplicationException;
 import java.util.function.Supplier;
 
+/**
+ * Main service class. Given an existing Pokemon name, it returns its Shakespearean translation
+ */
 @ApplicationScoped
 public class ShakespeareanPokedexService {
 

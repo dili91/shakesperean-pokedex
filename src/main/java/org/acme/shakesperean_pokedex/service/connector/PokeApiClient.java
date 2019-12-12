@@ -15,6 +15,11 @@ import javax.ws.rs.core.MediaType;
 import static javax.ws.rs.core.HttpHeaders.USER_AGENT;
 import static org.acme.shakesperean_pokedex.common.RestClientConfiguration.*;
 
+/**
+ * Connector for PokeApi API
+ *
+ * @see "https://pokeapi.co/"
+ */
 @RegisterRestClient
 @Path("/api/v2")
 public interface PokeApiClient {

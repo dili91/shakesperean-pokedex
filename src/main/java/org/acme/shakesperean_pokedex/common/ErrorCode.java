@@ -1,5 +1,8 @@
 package org.acme.shakesperean_pokedex.common;
 
+/**
+ * Application error codes returned on API errors
+ */
 public enum ErrorCode {
     GENERIC("E:GENERIC"),
     TRANSLATION("E:TRANSLATION"),

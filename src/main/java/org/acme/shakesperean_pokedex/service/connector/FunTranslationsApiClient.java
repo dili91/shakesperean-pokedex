@@ -12,6 +12,11 @@ import javax.ws.rs.core.MediaType;
 
 import static org.acme.shakesperean_pokedex.common.RestClientConfiguration.*;
 
+/**
+ * Connector for FunTranslation Shakespeare API
+ *
+ * @see "https://funtranslations.com/api/shakespeare"
+ */
 @RegisterRestClient
 public interface FunTranslationsApiClient {
 

@@ -3,7 +3,10 @@ package org.acme.shakesperean_pokedex.exception;
 import javax.ws.rs.WebApplicationException;
 
 /**
- * wrapper required as workaroung for this currently open issue https://github.com/quarkusio/quarkus/issues/4031
+ * Exception class that wraps instances of type WebApplicationException.
+ * Currently required due to a Quarkus open issue
+ *
+ * @see "https://github.com/quarkusio/quarkus/issues/4031"
  */
 public class RemoteApiException extends RuntimeException {
 

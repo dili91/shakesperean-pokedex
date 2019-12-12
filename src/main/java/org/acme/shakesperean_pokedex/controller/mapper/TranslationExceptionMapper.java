@@ -10,6 +10,10 @@ import javax.ws.rs.ext.Provider;
 
 import static javax.ws.rs.core.Response.status;
 
+/**
+ * Mapper that intercepts exceptions of type TranslationException and
+ * transform then in an instance of ApiError to be later serialized in JSON format
+ */
 @Provider
 public class TranslationExceptionMapper implements ExceptionMapper<TranslationException> {
 

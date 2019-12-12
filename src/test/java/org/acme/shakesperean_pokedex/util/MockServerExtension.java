@@ -10,6 +10,7 @@ public class MockServerExtension implements AfterEachCallback, BeforeAllCallback
 
     private WireMockServer wireMockServer;
 
+    //todo: improve this to support dynamic ports
     public MockServerExtension() {
         wireMockServer = new WireMockServer(options().port(MOCK_SERVER_PORT_NUMBER));
     }
