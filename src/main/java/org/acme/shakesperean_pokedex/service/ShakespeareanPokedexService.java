@@ -2,6 +2,7 @@ package org.acme.shakesperean_pokedex.service;
 
 import org.acme.shakesperean_pokedex.common.dto.PokedexResult;
 import org.acme.shakesperean_pokedex.common.dto.PokedexResult.Builder;
+import org.acme.shakesperean_pokedex.common.dto.fun_translations.Translation;
 import org.acme.shakesperean_pokedex.common.dto.poke_api.PokemonSpecies;
 import org.acme.shakesperean_pokedex.exception.RemoteApiException;
 import org.acme.shakesperean_pokedex.exception.TranslationException;
@@ -65,7 +66,8 @@ public class ShakespeareanPokedexService {
             throw new TranslationException(DESCRIPTION_NOT_FOUND_ERR_MSG);
         }
 
-        String translatedDescription = funTranslationsApiClient.translate(originalDescription)
+        Translation translation = remoteApiCallWrapper(() -> funTranslationsApiClient.translate(originalDescription));
+        String translatedDescription = translation
                 .getContents()
                 .getTranslated();
 
