@@ -63,10 +63,10 @@ Finally run the container using:
 
 ### Native image execution
 One of the reasons I wanted to use Quarkus for this project is because of its built-in support for native image creation.
-The main advantage of it is that it leverages AOT compilation and almost remove the startup time of the application. 
+The main advantage of it is that it leverages AOT compilation and almost eliminates the startup time of the application. 
 To do so GraalVM [should be properly configured](https://quarkus.io/guides/building-native-image#configuring-graalvm).
 
-To create a **native image** run the following ():
+To create a **native image** run the following:
 
 `./mvnw package -Pnative`
 
@@ -75,8 +75,13 @@ Note: this might take few minutes.
 To run it just:
 `./target/shakespearean-pokedex-1.0.0-SNAPSHOT-runner`
 
-Have a look at application startup time:
+Note: have a look at application startup time:
 
+`2019-12-12 18:19:26,314 INFO  [io.quarkus] (main) shakespearean-pokedex 1.0.0-SNAPSHOT (running on Quarkus 1.0.1.Final) started in 0.016s. Listening on: http://0.0.0.0:8080`
+
+and compare it to the startup time of the same application in jvm mode: 
+
+`2019-12-12 16:59:01,545 INFO  [io.quarkus] (main) shakespearean-pokedex 1.0.0-SNAPSHOT (running on Quarkus 1.0.1.Final) started in 8.077s. Listening on: http://0.0.0.0:8080`
 
 ## OpenAPI documentation
 SwaggerUI is available at **/swagger-ui** path.
