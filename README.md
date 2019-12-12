@@ -13,7 +13,8 @@ libraries are just few of them I used in this project.
 
 Moreover it provides built-in support for testing, containerized applications creation, [Kubernetes](https://kubernetes.io/) 
 deployment and native images leveraging [GraalVM](https://www.graalvm.org/) features.
-Finally I also wanted to explore Quarkus capabilities with respect to other well known Java frameworks like Springboot.
+
+Finally I also wanted to explore Quarkus capabilities with respect to other well known Java frameworks like Spring Boot.
 I also enjoyed Quarkus live-reloading feature which is not so common while developing in Java.
 
 ## Running the application
@@ -31,8 +32,15 @@ Run the following from the root directory:
 ### Java execution
 Another possible approach is to build the application jar first and then run it using java lib.
 
+to package it:
+
 ```
-./mvnw compile 
+./mvnw package
+```
+
+to run it: 
+
+```
 java -jar target/shakespearean-pokedex-1.0.0-SNAPSHOT-runner.jar
 ```
 
@@ -58,7 +66,7 @@ One of the reasons I wanted to use Quarkus for this project is because of its bu
 The main advantage of it is that it leverages AOT compilation and almost remove the startup time of the application. 
 To do so GraalVM [should be properly configured](https://quarkus.io/guides/building-native-image#configuring-graalvm).
 
-To create a *native image* run the following ():
+To create a **native image** run the following ():
 
 `./mvnw package -Pnative`
 
@@ -74,15 +82,16 @@ Have a look at application startup time:
 SwaggerUI is available at /swagger-ui path.
 
 ## Tests
-Unit and integration tests are defined into src/test/java directory. Whenever possible I did not rely on Quarkus application
-context as I wanted to keep the test as pure and independent as possible. I structured tests in *unit*, *integration* and 
-*integration_native* packages to keep them more readable and in order to split their execution in isolated phases.
+Unit and integration tests are defined into **src/test** directory. 
+Whenever possible I did not rely on Quarkus application context as I wanted to keep the test as pure and independent as possible.
+I structured tests in **unit**, **integration** and **integration_native** packages to keep them more readable and in order
+ to split their execution in isolated phases.
 
-*unit* package contains pure unit tests. Amongst those builders, mappers and main service tests are defined.
-*integration* package contains integration tests, that is either tests which involved external services (stubbed with [Wiremock](http://wiremock.org/))
+**unit** package contains pure unit tests. Amongst those builders, mappers and main service tests are defined.
+**integration** package contains integration tests, that is either tests which involved external services (stubbed with [Wiremock](http://wiremock.org/))
 or tests relying Quarkus application context (see tests marked with _@QuarkusTest_ annotation). REST endpoint and fault tolerance
 tests are included here as well.  
-finally *integration_native* package include a test to be executed against the native image of this project.
+finally **integration_native** package include a test to be executed against the native image of this project.
 
 Execution phases are defined with the help of (surefire)[https://maven.apache.org/surefire/maven-surefire-plugin/] and 
 (failsafe)[https://maven.apache.org/surefire/maven-failsafe-plugin/] maven plugins. 
