@@ -7,6 +7,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
+import static javax.ws.rs.core.Response.Status.INTERNAL_SERVER_ERROR;
 import static javax.ws.rs.core.Response.status;
 
 /**
@@ -26,6 +27,6 @@ public class GenericExceptionMapper implements ExceptionMapper<Exception> {
                 .withMessage(exception.getMessage())
                 .build();
 
-        return status(Response.Status.INTERNAL_SERVER_ERROR).entity(apiError).build();
+        return status(INTERNAL_SERVER_ERROR).entity(apiError).build();
     }
 }
