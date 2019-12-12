@@ -17,6 +17,7 @@ import java.util.function.Supplier;
 
 /**
  * Main service class. Given an existing Pokemon name, it returns its Shakespearean translation
+ * todo: improve this with a cache, either here or on rest clients dependencies
  */
 @ApplicationScoped
 public class ShakespeareanPokedexService {

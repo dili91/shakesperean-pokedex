@@ -6,11 +6,14 @@ import org.junit.jupiter.api.extension.*;
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.options;
 import static org.acme.shakesperean_pokedex.util.Configuration.MOCK_SERVER_PORT_NUMBER;
 
+/**
+ * Junit5 extensions to provide default operation with a WireMock server instance
+ * todo: improve this to support dynamic ports
+ */
 public class MockServerExtension implements AfterEachCallback, BeforeAllCallback, AfterAllCallback, TestInstancePostProcessor {
 
     private WireMockServer wireMockServer;
 
-    //todo: improve this to support dynamic ports
     public MockServerExtension() {
         wireMockServer = new WireMockServer(options().port(MOCK_SERVER_PORT_NUMBER));
     }

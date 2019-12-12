@@ -1,7 +1,6 @@
 /* Copyright 2019 freecodeformat.com */
 package org.acme.shakesperean_pokedex.common.dto.poke_api;
 
-/* Time: 2019-12-08 16:59:3 @author freecodeformat.com @website http://www.freecodeformat.com/json2javabean.php */
 public class Pokemon {
     //todo: improve dto and all its dependencies with Optional values
 

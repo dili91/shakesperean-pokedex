@@ -5,7 +5,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
-/* Time: 2019-12-08 16:59:3 @author freecodeformat.com @website http://www.freecodeformat.com/json2javabean.php */
+/**
+ * DTO class for pokemon species obhect.
+ * todo: improve this and referenced DTOs with optional values to mitigate NPEs
+ */
 public class PokemonSpecies {
 
     @JsonProperty("base_happiness")
