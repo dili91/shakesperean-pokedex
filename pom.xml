@@ -95,6 +95,7 @@
         <version>${compiler-plugin.version}</version>
       </plugin>
       <plugin>
+<!--        todo: improve this and split unit, integration and native tests-->
         <artifactId>maven-surefire-plugin</artifactId>
         <version>${surefire-plugin.version}</version>
         <executions>
@@ -102,6 +103,7 @@
             <id>default-test</id>
             <configuration>
               <excludes>
+                <exclude>*/unit/**</exclude>
                 <exclude>*/integration/**</exclude>
                 <exclude>*/integration_native/**</exclude>
               </excludes>
