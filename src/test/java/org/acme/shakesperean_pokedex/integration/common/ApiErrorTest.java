@@ -15,12 +15,12 @@ import static org.skyscreamer.jsonassert.JSONAssert.assertEquals;
 import static org.skyscreamer.jsonassert.JSONCompareMode.STRICT;
 
 @QuarkusTest
-@DisplayName("Test for JSON serialization using Quarkus object mapper bean")
+@DisplayName("Test for ApiError serialization using Quarkus object mapper bean")
 public class ApiErrorTest {
 
     public static final String AN_ERROR_MESSAGE = "a-message";
     private static String AN_API_ERROR_JSON = "{\"code\":\"E:GENERIC\",\"externalCode\":null,\"message\":\"a-message\"}";
-    private final ApiError AN_API_ERROR = ApiError.Builder.anApiError()
+    private static final ApiError AN_API_ERROR = ApiError.Builder.anApiError()
             .withCode(GENERIC.value())
             .withMessage(AN_ERROR_MESSAGE)
             .build();
@@ -31,7 +31,6 @@ public class ApiErrorTest {
     @Test
     @DisplayName("Should convert an ApiError instance to JSON")
     public void shouldDeserializeUsingBuilder() throws JsonProcessingException, JSONException {
-
         String json = objectMapper.writeValueAsString(AN_API_ERROR);
 
         assertEquals(json, AN_API_ERROR_JSON, STRICT);
