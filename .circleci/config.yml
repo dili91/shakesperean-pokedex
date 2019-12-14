@@ -9,6 +9,7 @@ jobs:
       - run:
           name: JAVA_HOME configuration
           command: |
+            echo "export APP_NAME=$app_name" >> $BASH_ENV
             echo 'export PATH=$JAVA_HOME/bin:$PATH' >> $BASH_ENV
             source $BASH_ENV
       - run:
