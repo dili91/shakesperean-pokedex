@@ -6,7 +6,15 @@ jobs:
       - image: circleci/openjdk:8-jdk-stretch
     steps:
       - checkout
+      - restore_cache:
+          key: shakesperean-pokedex-quarkus-{{ checksum "pom.xml" }}
       - run:
           name: Build
           command: ./mvnw clean compile
-          
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: shakesperean-pokedex-quarkus-{{ checksum "pom.xml" }}
+      - run:
+          name: Unit tests
+          command: ./mvnw test
