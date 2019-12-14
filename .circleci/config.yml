@@ -14,8 +14,7 @@ jobs:
       - run:
           name: Maven java version
           command: |
-            env | grep -i java
-            $JAVA_HOME/bin/javac -version
+            env | grep -i path
             ./mvnw --version
       - restore_cache:
           key: shakesperean-pokedex-quarkus-{{ checksum "pom.xml" }}
