@@ -14,7 +14,7 @@ jobs:
       - run:
           name: Maven java version
           command: |
-            env grep -i java
+            env | grep -i java
             $JAVA_HOME/bin/javac -version
             ./mvnw --version
       - restore_cache:
