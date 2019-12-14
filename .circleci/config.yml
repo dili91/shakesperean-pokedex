@@ -7,8 +7,8 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Env check
-          command: env | grep -i java && ls $JAVA_HOME
+          name: Requirements
+          command: export JAVACMD=$JAVA_HOME/bin/java
       - run:
           name: Maven java version
           command: ./mvnw --version
