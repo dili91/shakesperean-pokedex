@@ -9,12 +9,14 @@ jobs:
       - run:
           name: JAVA_HOME configuration
           command: |
-            echo "export APP_NAME=$app_name" >> $BASH_ENV
             echo 'export PATH=$JAVA_HOME/bin:$PATH' >> $BASH_ENV
             source $BASH_ENV
       - run:
           name: Maven java version
-          command: env | grep -i java && ./mvnw --version
+          command: |
+            env grep -i java
+            $JAVA_HOME/bin/javac -version
+            ./mvnw --version
       - restore_cache:
           key: shakesperean-pokedex-quarkus-{{ checksum "pom.xml" }}
       - run:
