@@ -7,8 +7,11 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Requirements
-          command: export PATH=$PATH:$JAVA_HOME
+          name: Env check
+          command: env | grep -i java
+      #      - run:
+      #          name: Requirements
+      #          command: export PATH=$PATH:$JAVA_HOME
       - restore_cache:
           key: shakesperean-pokedex-quarkus-{{ checksum "pom.xml" }}
       - run:
