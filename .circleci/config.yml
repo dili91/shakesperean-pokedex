@@ -8,10 +8,10 @@ jobs:
       - checkout
       - run:
           name: Requirements
-          command: export JAVACMD=$JAVA_HOME/bin/java
+          command: export PATH=$JAVA_HOME/bin:$PATH
       - run:
           name: Maven java version
-          command: ./mvnw --version
+          command: env | grep -i java && ./mvnw --version
       - restore_cache:
           key: shakesperean-pokedex-quarkus-{{ checksum "pom.xml" }}
       - run:
