@@ -9,9 +9,9 @@ jobs:
       - run:
           name: Env check
           command: env | grep -i java && ls $JAVA_HOME
-      #      - run:
-      #          name: Requirements
-      #          command: export PATH=$PATH:$JAVA_HOME
+      - run:
+        name: Maven java version
+        command: ./mvnw --version
       - restore_cache:
           key: shakesperean-pokedex-quarkus-{{ checksum "pom.xml" }}
       - run:
