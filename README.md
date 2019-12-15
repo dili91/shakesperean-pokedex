@@ -1,8 +1,8 @@
-# Shakespearean Pokedex
+# Shakespearean Pokedex [![CircleCI](https://circleci.com/gh/dili91/shakesperean-pokedex.svg?style=svg)](https://circleci.com/gh/dili91/shakesperean-pokedex)
 
 A [Quarkus](https://quarkus.io/) based REST API that, given a Pokemon name, returns its description translated in
  Shakespearean style.
-
+  
 ## Technology stack
 The project is built on top of Quarkus framework. 
 
@@ -19,12 +19,19 @@ I also enjoyed Quarkus live-reloading feature which is not so common while devel
 
 ## Running the application
 In order to run the project the following dependencies are required: 
-- any distribution of JDK8 or 11+
+- any distribution of JDK8 or 11+. Make sure JAVA_HOME environment variable is property set
 - optionally [GraalVM](https://www.graalvm.org/) for native image build and execution
 - optionally [Docker](https://docs.docker.com/) to build project images and run the containerized version of this project
 
 ### Maven wrapper
 The simplest way to run the project is to use the [Maven](https://maven.apache.org/) wrapper bundled in this project. 
+
+Let's first check whether the wrapper points to the desired java executable:
+
+`./mvnv --version`
+
+As JDK is required to compile the project, we need to double check that jdk executable is referenced and not jre one.
+
 Run the following from the root directory:
 
 `./mvnw compile quarkus:dev`
@@ -141,4 +148,4 @@ To see collected traces open http://localhost:16686/search in your browser
 
 ### Continuous integration
 
-//todo setup CircleCI build
+The project is [configured](.circleci/config.yml) to be compiled and tested by a [CircleCI pipeline](https://circleci.com/gh/dili91/shakesperean-pokedex) .
