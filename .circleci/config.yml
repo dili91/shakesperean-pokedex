@@ -12,15 +12,15 @@ jobs:
             echo 'export PATH=$JAVA_HOME/bin:$PATH' >> $BASH_ENV
             source $BASH_ENV
             ./mvnw --version
-      - restore_cache:
-          key: shakesperean-pokedex-quarkus-{{ checksum "pom.xml" }}
+      #      - restore_cache:
+      #          key: shakesperean-pokedex-quarkus-{{ checksum "pom.xml" }}
       - run:
           name: Build
           command: ./mvnw clean compile
-      - save_cache:
-          paths:
-            - ~/.m2
-          key: shakesperean-pokedex-quarkus-{{ checksum "pom.xml" }}
+      #      - save_cache:
+      #          paths:
+      #            - ~/.m2
+      #          key: shakesperean-pokedex-quarkus-{{ checksum "pom.xml" }}
       - run:
           name: Unit tests
           command: ./mvnw test
