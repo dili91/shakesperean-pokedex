@@ -28,7 +28,7 @@ The simplest way to run the project is to use the [Maven](https://maven.apache.o
 
 Let's first check whether the wrapper points to the desired java executable:
 
-`./mvnv --version`
+`./mvnw --version`
 
 As JDK is required to compile the project, we need to double check that jdk executable is referenced and not jre one.
 
