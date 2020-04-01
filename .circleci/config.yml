@@ -44,12 +44,12 @@ jobs:
       - restore_cache:
           key: m2-{{ checksum "pom.xml" }}
       - run : 
-          name: Install Java 11
+          name: Install GraalVM
           command: |
-            sudo add-apt-repository ppa:openjdk-r/ppa
-            sudo apt-get update -q
-            sudo apt install -y openjdk-11-jdk
-      - run: java -version      
+            curl -s "https://get.sdkman.io" | bash
+            source "$HOME/.sdkman/bin/sdkman-init.sh"
+            sdk install java 20.0.0-grl
+      - run: gu      
       - run:
           name: Install GraalVM Native Image Generator
           command: gu install native-image 
