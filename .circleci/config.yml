@@ -58,7 +58,6 @@ jobs:
           command: |
             sdk install java << pipeline.parameters.graalvm_sdkman_version >>
             sdk default java << pipeline.parameters.graalvm_sdkman_version >>
-      - run: gu    
       - run:
           name: Install GraalVM Native Image Generator
           command: gu install native-image 
