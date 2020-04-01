@@ -48,7 +48,7 @@ jobs:
           command: |
             curl -s "https://get.sdkman.io" | bash
             source "$HOME/.sdkman/bin/sdkman-init.sh"
-            sdk install java 20.0.0-grl
+            sdk install java 20.0.0.r11-grl
       - run: gu      
       - run:
           name: Install GraalVM Native Image Generator
