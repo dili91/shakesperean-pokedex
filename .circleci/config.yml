@@ -52,10 +52,10 @@ jobs:
           name: Install SDKMAN
           command: |
             curl -s "https://get.sdkman.io" | bash
+            echo '\nsource $HOME/.sdkman/bin/sdkman-init.sh' >> $HOME/.bashrc
       - run : 
           name: Install GraalVM
           command: |
-            source "$HOME/.sdkman/bin/sdkman-init.sh"
             sdk install java << pipeline.parameters.graalvm_sdkman_version >>
             sdk default java << pipeline.parameters.graalvm_sdkman_version >>
             java -version
