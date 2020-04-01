@@ -9,6 +9,7 @@ references:
   graalvm_executor: &graalvm_executor
     docker:
       - image: oracle/graalvm-ce:20.0.0-java11
+    working_directory: /home/circleci/project  
   restore_repo: &restore_repo
     restore_cache:
       keys:
@@ -40,9 +41,9 @@ jobs:
     <<: *graalvm_executor
     steps:
       - *restore_repo
-      - run: ls -lah /home/circleci/project
-      # - restore_cache:
-      #     key: m2-{{ checksum "pom.xml" }}
+      - run: ls -lah 
+      - restore_cache:
+          key: m2-{{ checksum "pom.xml" }}
       - run:
           name: graalvm test
           command: gu list    
