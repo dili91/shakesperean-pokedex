@@ -98,4 +98,12 @@ workflows:
   shakesperean_pokedex:
     jobs:
       - checkout
-      - build          
+      - build:
+          requires:
+            - checkout
+      - unit_tests:
+          requires:
+            - build            
+      - integration_tests:
+          requires:
+            - build       
