@@ -46,7 +46,7 @@ jobs:
       - run:
           name: Install GraalVM Native Image Generator
           command: gu install native-image 
-      - run: ./mvnw clean package -Pnative
+      - run: ./mvnw clean package -Pnative -Dquarkus.native.native-image-xmx=6g
   unit_tests:
     <<: *openjdk_executor
     steps:
