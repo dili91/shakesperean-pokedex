@@ -40,8 +40,9 @@ jobs:
     <<: *graalvm_executor
     steps:
       - *restore_repo
-      - restore_cache:
-          key: m2-{{ checksum "pom.xml" }}
+      - run: ls -lah
+      # - restore_cache:
+      #     key: m2-{{ checksum "pom.xml" }}
       - run:
           name: graalvm test
           command: gu list    
