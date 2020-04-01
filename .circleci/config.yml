@@ -53,6 +53,7 @@ jobs:
           command: |
             curl -s "https://get.sdkman.io" | bash
             echo '\nsource $HOME/.sdkman/bin/sdkman-init.sh' >> $HOME/.bashrc
+            cat $HOME/.bashrc
       - run : 
           name: Install GraalVM
           command: |
