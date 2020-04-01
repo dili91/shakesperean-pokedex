@@ -66,39 +66,7 @@ jobs:
       - store_test_results:
           path: ~/test-results
       - store_artifacts:
-          path: ~/test-results/junit              
-
-  # build:
-  #   docker:
-  #     - image: circleci/openjdk:11
-  #   steps:
-  #     - checkout
-  #     - restore_cache:
-  #         key: shakesperean-pokedex-maven-dependencies-{{ checksum "pom.xml" }}
-  #     - run:
-  #         name: Build
-  #         command: ./mvnw clean package -DskipTests
-  #     - run:
-  #         name: Unit tests
-  #         command: ./mvnw test
-  #     - run:
-  #         name: Integration tests
-  #         command: ./mvnw integration-test -Dskip.unit.test=true
-  #     - save_cache:
-  #         paths:
-  #           - ~/.m2
-  #         key: shakesperean-pokedex-maven-dependencies-{{ checksum "pom.xml" }}
-  #     - run:
-  #         name: Save test results
-  #         command: |
-  #           mkdir -p ~/test-results/junit/
-  #           find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} ~/test-results/junit/ \;
-  #           find . -type f -regex ".*/target/failsafe-reports/.*xml" ! -name '*failsafe-summary.xml' -exec cp {} ~/test-results/junit/ \;
-  #         when: always
-  #     - store_test_results:
-  #         path: ~/test-results
-  #     - store_artifacts:
-  #         path: ~/test-results/junit
+          path: ~/test-results/junit
 
 workflows:
   shakesperean_pokedex:
