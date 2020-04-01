@@ -3,9 +3,12 @@
 version: 2.1
 
 references:
-  default_executor: &default_executor
+  openjdk_executor: &openjdk_executor
     docker:
       - image: circleci/openjdk:11
+  graalvm_executor: &graalvm_executor
+    docker:
+      - image: oracle/graalvm-ce:20.0.0-java11
   restore_repo: &restore_repo
     restore_cache:
       keys:
@@ -15,7 +18,7 @@ references:
 
 jobs:
   checkout:
-    <<: *default_executor
+    <<: *openjdk_executor
     steps:
       - checkout
       - save_cache:
@@ -23,7 +26,7 @@ jobs:
           paths:
             - .
   build:
-    <<: *default_executor
+    <<: *openjdk_executor
     steps:
       - *restore_repo
       - restore_cache:
@@ -33,8 +36,18 @@ jobs:
           paths:
             - ~/.m2
           key: m2-{{ checksum "pom.xml" }}
+  native_build:
+    <<: *graalvm_executor
+    steps:
+      - *restore_repo
+      - restore_cache:
+          key: m2-{{ checksum "pom.xml" }}
+      - run:
+          name: graalvm test
+          command: gu list    
+      - run: ./mvnw clean package -Pnative
   unit_tests:
-    <<: *default_executor
+    <<: *openjdk_executor
     steps:
       - *restore_repo
       - restore_cache:
@@ -51,7 +64,7 @@ jobs:
       - store_artifacts:
           path: ~/test-results/junit    
   integration_tests:
-    <<: *default_executor
+    <<: *openjdk_executor
     steps:
       - *restore_repo
       - restore_cache:
@@ -80,4 +93,7 @@ workflows:
             - build            
       - integration_tests:
           requires:
-            - build       
+            - build
+      - native_build:
+          requires:
+            - checkout             
