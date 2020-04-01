@@ -61,7 +61,12 @@ jobs:
       - run:
           name: Install GraalVM Native Image Generator
           command: gu install native-image 
-      - run: ./mvnw clean package -Pnative
+      - run: 
+          name: Build native image
+          command: ./mvnw clean package -Pnative -Dskip.unit.test=true -Dskip.integration.test=true 
+      - run: 
+          name: Test native image
+          command: ./mvnw verify -Pnative -Dskip.unit.test=true -Dskip.integration.test=true     
   unit_tests:
     <<: *openjdk_executor
     steps:
