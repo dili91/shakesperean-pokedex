@@ -52,8 +52,7 @@ jobs:
           name: Install SDKMAN
           command: |
             curl -s "https://get.sdkman.io" | bash
-            echo '\nsource $HOME/.sdkman/bin/sdkman-init.sh' >> $HOME/.bashrc
-            cat $HOME/.bashrc
+            echo '[[ -s "/home/circleci/.sdkman/bin/sdkman-init.sh" ]] && source "/home/circleci/.sdkman/bin/sdkman-init.sh"' >> $BASH_ENV
       - run : 
           name: Install GraalVM
           command: |
