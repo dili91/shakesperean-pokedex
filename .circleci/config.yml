@@ -26,15 +26,19 @@ jobs:
     <<: *default_executor
     steps:
       - *restore_repo
+      - restore_cache:
+          key: m2-{{ checksum "pom.xml" }}
       - run: ./mvnw clean package -Dskip.unit.test=true -Dskip.integration.test=true
       - save_cache:
           paths:
             - ~/.m2
-          key: shakesperean-pokedex-maven-dependencies-{{ checksum "pom.xml" }}
+          key: m2-{{ checksum "pom.xml" }}
   unit_tests:
     <<: *default_executor
     steps:
       - *restore_repo
+      - restore_cache:
+          key: m2-{{ checksum "pom.xml" }}
       - run: ./mvnw test
       - run:
           name: Save unit test results
@@ -50,6 +54,8 @@ jobs:
     <<: *default_executor
     steps:
       - *restore_repo
+      - restore_cache:
+          key: m2-{{ checksum "pom.xml" }}
       - run: ./mvnw integration-test -Dskip.unit.test=true 
       - run:
           name: Save integration test results
