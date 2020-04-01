@@ -43,7 +43,13 @@ jobs:
       - *restore_repo
       - restore_cache:
           key: m2-{{ checksum "pom.xml" }}
-      - run : java -version    
+      - run : 
+          name: Install Java 11
+          command: |
+            sudo add-apt-repository ppa:openjdk-r/ppa
+            sudo apt-get update -q \
+            sudo apt install -y openjdk-11-jdk
+      - run: java -version      
       - run:
           name: Install GraalVM Native Image Generator
           command: gu install native-image 
