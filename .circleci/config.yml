@@ -58,11 +58,6 @@ jobs:
           command: |
             sdk install java << pipeline.parameters.graalvm_sdkman_version >>
             sdk default java << pipeline.parameters.graalvm_sdkman_version >>
-            java -version
-      - run: |
-          source "$HOME/.sdkman/bin/sdkman-init.sh"
-          java -version
-          gu
       - run: gu    
       - run:
           name: Install GraalVM Native Image Generator
