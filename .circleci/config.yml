@@ -41,12 +41,11 @@ jobs:
     <<: *graalvm_executor
     steps:
       - *restore_repo
-      - run: ls -lah 
       - restore_cache:
           key: m2-{{ checksum "pom.xml" }}
       - run:
-          name: graalvm test
-          command: gu list    
+          name: Install GraalVM Native Image Generator
+          command: gu install native-image 
       - run: ./mvnw clean package -Pnative
   unit_tests:
     <<: *openjdk_executor
