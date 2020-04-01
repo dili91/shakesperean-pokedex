@@ -48,7 +48,7 @@ to package it:
 to run it: 
 
 ```
-java -jar target/shakespearean-pokedex-1.0.0-SNAPSHOT-runner.jar
+java -jar target/shakespearean-pokedex-1.0.1-SNAPSHOT-runner.jar
 ```
 
 ### Docker container execution
@@ -80,15 +80,15 @@ To create a **native image** run the following:
 Note: this might take few minutes.
 
 To run it just:
-`./target/shakespearean-pokedex-1.0.0-SNAPSHOT-runner`
+`./target/shakespearean-pokedex-1.0.1-SNAPSHOT-runner`
 
 Note: have a look at application startup time:
 
-`2019-12-12 18:19:26,314 INFO  [io.quarkus] (main) shakespearean-pokedex 1.0.0-SNAPSHOT (running on Quarkus 1.0.1.Final) started in 0.016s. Listening on: http://0.0.0.0:8080`
+`2019-12-12 18:19:26,314 INFO  [io.quarkus] (main) shakespearean-pokedex 1.0.1-SNAPSHOT (running on Quarkus 1.0.1.Final) started in 0.016s. Listening on: http://0.0.0.0:8080`
 
 and compare it to the startup time of the same application in jvm mode: 
 
-`2019-12-12 16:59:01,545 INFO  [io.quarkus] (main) shakespearean-pokedex 1.0.0-SNAPSHOT (running on Quarkus 1.0.1.Final) started in 8.077s. Listening on: http://0.0.0.0:8080`
+`2019-12-12 16:59:01,545 INFO  [io.quarkus] (main) shakespearean-pokedex 1.0.1-SNAPSHOT (running on Quarkus 1.0.1.Final) started in 8.077s. Listening on: http://0.0.0.0:8080`
 
 ## OpenAPI documentation
 SwaggerUI is available at **/swagger-ui** path.
