@@ -9,6 +9,7 @@ references:
   graalvm_executor: &graalvm_executor
     docker:
       - image: oracle/graalvm-ce:20.0.0-java11
+    resource_class: medium+  
     working_directory: /home/circleci/project  
   restore_repo: &restore_repo
     restore_cache:
