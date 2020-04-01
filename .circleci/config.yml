@@ -7,10 +7,9 @@ references:
     docker:
       - image: circleci/openjdk:11
   graalvm_executor: &graalvm_executor
-    docker:
-      - image: oracle/graalvm-ce:20.0.0-java11
-    resource_class: medium+  
-    working_directory: /home/circleci/project  
+    machine:
+      image: ubuntu-1604:201903-01  
+    # working_directory: /home/circleci/project  
   restore_repo: &restore_repo
     restore_cache:
       keys:
@@ -44,6 +43,7 @@ jobs:
       - *restore_repo
       - restore_cache:
           key: m2-{{ checksum "pom.xml" }}
+      - run : java -version    
       - run:
           name: Install GraalVM Native Image Generator
           command: gu install native-image 
