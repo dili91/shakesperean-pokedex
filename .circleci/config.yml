@@ -4,8 +4,8 @@ version: 2.1
 
 references:
   default_executor: &default_executor
-    machine:
-      image: circleci/openjdk:11
+    docker:
+      - image: circleci/openjdk:11
   restore_repo: &restore_repo
     restore_cache:
       keys:
