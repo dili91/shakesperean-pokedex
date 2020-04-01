@@ -52,9 +52,8 @@ jobs:
           command: |
             source "$HOME/.sdkman/bin/sdkman-init.sh"
             sdk install java 20.0.0.r11-grl
-            sdk use java 20.0.0.r11-grl
+            sdk default java 20.0.0.r11-grl
             java -version
-            gu
       - run: java -version
       - run: gu    
       - run:
