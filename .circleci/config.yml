@@ -9,7 +9,7 @@ references:
   graalvm_executor: &graalvm_executor
     machine:
       image: ubuntu-1604:201903-01  
-    # working_directory: /home/circleci/project  
+    # working_directory: /home/circleci/project 
   restore_repo: &restore_repo
     restore_cache:
       keys:
@@ -44,12 +44,17 @@ jobs:
       - restore_cache:
           key: m2-{{ checksum "pom.xml" }}
       - run : 
-          name: Install GraalVM
+          name: Install SDKMAN
           command: |
             curl -s "https://get.sdkman.io" | bash
-            source "$HOME/.sdkman/bin/sdkman-init.sh"
+            source "$HOME/.sdkman/bin/sdkman-init.sh"  
+      - run : 
+          name: Install GraalVM
+          command: |
             sdk install java 20.0.0.r11-grl
-      - run: gu      
+            sdk use java 20.0.0.r11-grl
+      - run: java -version
+      - run: gu    
       - run:
           name: Install GraalVM Native Image Generator
           command: gu install native-image 
