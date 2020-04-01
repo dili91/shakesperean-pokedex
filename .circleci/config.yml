@@ -40,7 +40,7 @@ jobs:
     <<: *graalvm_executor
     steps:
       - *restore_repo
-      - run: ls -lah
+      - run: ls -lah /home/circleci/project
       # - restore_cache:
       #     key: m2-{{ checksum "pom.xml" }}
       - run:
