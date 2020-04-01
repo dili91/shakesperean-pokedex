@@ -1,6 +1,5 @@
 package org.acme.shakesperean_pokedex.unit.service;
 
-import com.sun.tools.javac.util.List;
 import org.acme.shakesperean_pokedex.common.dto.PokedexResult;
 import org.acme.shakesperean_pokedex.common.dto.fun_translations.Contents;
 import org.acme.shakesperean_pokedex.common.dto.fun_translations.Translation;
@@ -15,6 +14,8 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.util.List;
 
 @DisplayName("Unit test for ShakespeareanPokedex Service ")
 class ShakespeareanPokedexServiceTest {
