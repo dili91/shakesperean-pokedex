@@ -53,7 +53,7 @@ class ShakespeareanPokedexServiceTest {
         );
 
         //expect
-        Throwable exception = assertThrows(TranslationException.class, ()
+        assertThrows(TranslationException.class, ()
                 -> shakespeareanPokedexService.getShakespeareanResult(A_POKEMON_NAME)
         );
     }
@@ -68,7 +68,7 @@ class ShakespeareanPokedexServiceTest {
         );
 
         //expect
-        Throwable exception = assertThrows(TranslationException.class, ()
+        assertThrows(TranslationException.class, ()
                 -> shakespeareanPokedexService.getShakespeareanResult(A_POKEMON_NAME)
         );
     }
