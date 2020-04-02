@@ -63,11 +63,11 @@ jobs:
           command: gu install native-image 
       - run: 
           name: Build native image
-          command: ./mvnw clean package -Pnative -Dskip.unit.test=true -Dskip.integration.test=true -Dquarkus.native.native-image-xmx=6g
+          command: ./mvnw clean package -Pnative -Dskip.unit.test=true -Dskip.integration.test=true -Dquarkus.native.native-image-xmx=5g
           no_output_timeout: 30m
       - run: 
           name: Test native image
-          command: ./mvnw verify -Pnative -Dskip.unit.test=true -Dskip.integration.test=true -Dquarkus.native.native-image-xmx=6g
+          command: ./mvnw verify -Pnative -Dskip.unit.test=true -Dskip.integration.test=true -Dquarkus.native.native-image-xmx=5g
           no_output_timeout: 30m    
   unit_tests:
     <<: *openjdk_executor
