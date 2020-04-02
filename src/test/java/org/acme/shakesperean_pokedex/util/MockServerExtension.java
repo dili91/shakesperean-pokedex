@@ -9,7 +9,10 @@ import static org.acme.shakesperean_pokedex.util.Configuration.MOCK_SERVER_PORT_
 /**
  * Junit5 extensions to provide default operation with a WireMock server instance
  * todo: improve this to support dynamic ports
+ * 
+ * currently not used due to this bugs on quarkus @see https://github.com/quarkusio/quarkus/issues/7199
  */
+@Deprecated
 public class MockServerExtension implements AfterEachCallback, BeforeAllCallback, AfterAllCallback, TestInstancePostProcessor {
 
     private WireMockServer wireMockServer;

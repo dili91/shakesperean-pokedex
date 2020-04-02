@@ -22,51 +22,48 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
- * todo: improve this making it completely Quarkus independent. I tried to build a test implementation this client but I got CDI errors
+ * todo: improve this making it completely Quarkus independent. I tried to build
+ * a test implementation this client but I got CDI errors
  */
 @DisplayName("Integration test for FunTranslations API connector")
 @QuarkusTest
 class FunTranslationsApiClientTest extends RemoteApiTest {
 
-    //dummies
-    private static final String A_TEXT_IN_MODERN_ENGLISH_LANGUAGE = "today sun is shining";
-    private static final String A_TEXT_IN_SHAKESPEAREAN_LANGUAGE = "The present day travelling lamp is shining";
+        // dummies
+        private static final String A_TEXT_IN_MODERN_ENGLISH_LANGUAGE = "today sun is shining";
+        private static final String A_TEXT_IN_SHAKESPEAREAN_LANGUAGE = "The present day travelling lamp is shining";
 
-    //system under test
-    @Inject
-    @RestClient
-    FunTranslationsApiClient funTranslationsApiClient;
+        // system under test
+        @Inject
+        @RestClient
+        FunTranslationsApiClient funTranslationsApiClient;
 
-    @Test
-    @DisplayName("should get a text translated in Shakespeare's language")
-    public void shouldGetAShakespeareanTranslation() {
-        //given
-        mockServer.stubFor(post(urlPathEqualTo(TRANSLATION_API_PATH))
-                .willReturn(ok()
-                        .withHeader(CONTENT_TYPE, APPLICATION_JSON)
-                        .withBodyFile(getFunTranslationsJsonStubLocation(TRANSLATION_API_SUN_IS_SHINING_JSON_STUB_FILE))
-                )
-        );
+        @Test
+        @DisplayName("should get a text translated in Shakespeare's language")
+        public void shouldGetAShakespeareanTranslation() {
+                // given
+                mockServer.stubFor(post(urlPathEqualTo(TRANSLATION_API_PATH))
+                                .willReturn(ok().withHeader(CONTENT_TYPE, APPLICATION_JSON)
+                                                .withBodyFile(getFunTranslationsJsonStubLocation(
+                                                                TRANSLATION_API_SUN_IS_SHINING_JSON_STUB_FILE))));
 
-        //when
-        Translation translation = funTranslationsApiClient.translate(A_TEXT_IN_MODERN_ENGLISH_LANGUAGE);
+                // when
+                Translation translation = funTranslationsApiClient.translate(A_TEXT_IN_MODERN_ENGLISH_LANGUAGE);
 
-        //then
-        assertEquals(A_TEXT_IN_MODERN_ENGLISH_LANGUAGE, translation.getContents().getText());
-        assertEquals(A_TEXT_IN_SHAKESPEAREAN_LANGUAGE, translation.getContents().getTranslated());
-    }
+                // then
+                assertEquals(A_TEXT_IN_MODERN_ENGLISH_LANGUAGE, translation.getContents().getText());
+                assertEquals(A_TEXT_IN_SHAKESPEAREAN_LANGUAGE, translation.getContents().getTranslated());
+        }
 
-    @Test
-    @DisplayName("should throw an exception when api rate limiting comes in")
-    public void shouldGetATooManyRequestException() {
-        //given
-        mockServer.stubFor(post(urlPathEqualTo(TRANSLATION_API_PATH))
-                .willReturn(status(429))
-        );
+        @Test
+        @DisplayName("should throw an exception when api rate limiting comes in")
+        public void shouldGetATooManyRequestException() {
+                // given
+                mockServer.stubFor(post(urlPathEqualTo(TRANSLATION_API_PATH)).willReturn(status(429)));
 
-        //expect
-        WebApplicationException exception = assertThrows(WebApplicationException.class,
-                () -> funTranslationsApiClient.translate(A_TEXT_IN_MODERN_ENGLISH_LANGUAGE));
-        assertEquals(TOO_MANY_REQUESTS, exception.getResponse().getStatusInfo().toEnum());
-    }
+                // expect
+                WebApplicationException exception = assertThrows(WebApplicationException.class,
+                                () -> funTranslationsApiClient.translate(A_TEXT_IN_MODERN_ENGLISH_LANGUAGE));
+                assertEquals(TOO_MANY_REQUESTS, exception.getResponse().getStatusInfo().toEnum());
+        }
 }

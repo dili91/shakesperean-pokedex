@@ -1,24 +1,37 @@
 package org.acme.shakesperean_pokedex.util;
 
+import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.options;
+import static org.acme.shakesperean_pokedex.util.Configuration.MOCK_SERVER_PORT_NUMBER;
+
 import com.github.tomakehurst.wiremock.WireMockServer;
-import org.junit.jupiter.api.extension.ExtendWith;
+
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+
 
 /**
- * todo: fix dependency issue that make all integration tests fail after quarkus upgrade to 1.3.1.Final
+ * todo: removed junit extension due to bugs introduced recently on quarkus
+ * @see https://github.com/quarkusio/quarkus/issues/7199
  */
-@ExtendWith(MockServerExtension.class)
 public abstract class RemoteApiTest {
 
-    //holds the mock server for this api
-    protected WireMockServer mockServer;
+    // holds the mock server for this api
+    protected static WireMockServer mockServer;
 
-    /**
-     * Called by Mock api extension
-     *
-     * @param mockServer wiremock server instan
-     */
-    public void setMockServer(WireMockServer mockServer) {
-        this.mockServer = mockServer;
+    @BeforeAll
+    public static void init() {
+        mockServer = new WireMockServer(options().port(MOCK_SERVER_PORT_NUMBER));
+        mockServer.start();
     }
 
+    @AfterAll
+    public static void afterAll() {
+        mockServer.stop();
+    }
+
+    @BeforeEach
+    public void reset() {
+        mockServer.resetAll();
+    }
 }
