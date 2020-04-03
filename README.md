@@ -1,4 +1,5 @@
-# Shakespearean Pokedex [![CircleCI](https://circleci.com/gh/dili91/shakesperean-pokedex.svg?style=svg)](https://circleci.com/gh/dili91/shakesperean-pokedex) [![codecov](https://codecov.io/gh/dili91/shakesperean-pokedex/branch/master/graph/badge.svg)](https://codecov.io/gh/dili91/shakesperean-pokedex)
+# Shakespearean Pokedex 
+[![CircleCI](https://circleci.com/gh/dili91/shakesperean-pokedex.svg?style=svg)](https://circleci.com/gh/dili91/shakesperean-pokedex) [![codecov](https://codecov.io/gh/dili91/shakesperean-pokedex/branch/master/graph/badge.svg)](https://codecov.io/gh/dili91/shakesperean-pokedex)
 
 A [Quarkus](https://quarkus.io/) based REST API that, given a Pokemon name, returns its description translated in
  Shakespearean style.
@@ -149,3 +150,8 @@ To see collected traces open http://localhost:16686/search in your browser
 ### Continuous integration
 
 The project is [configured](.circleci/config.yml) to be compiled and tested by a [CircleCI pipeline](https://circleci.com/gh/dili91/shakesperean-pokedex) .
+
+
+### Code coverage
+
+The project uses [Jacoco](https://www.eclemma.org/jacoco/) and [Codecov](https://codecov.io/gh/dili91/shakesperean-pokedex) to generate and analyse test coverage
