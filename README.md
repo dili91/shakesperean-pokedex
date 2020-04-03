@@ -1,4 +1,4 @@
-# Shakespearean Pokedex [![CircleCI](https://circleci.com/gh/dili91/shakesperean-pokedex.svg?style=svg)](https://circleci.com/gh/dili91/shakesperean-pokedex)
+# Shakespearean Pokedex [![CircleCI](https://circleci.com/gh/dili91/shakesperean-pokedex.svg?style=svg)](https://circleci.com/gh/dili91/shakesperean-pokedex) [![codecov](https://codecov.io/gh/dili91/shakesperean-pokedex/branch/master/graph/badge.svg)](https://codecov.io/gh/dili91/shakesperean-pokedex)
 
 A [Quarkus](https://quarkus.io/) based REST API that, given a Pokemon name, returns its description translated in
  Shakespearean style.
