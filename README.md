@@ -20,7 +20,7 @@ I also enjoyed Quarkus live-reloading feature which is not so common while devel
 
 ## Running the application
 In order to run the project the following dependencies are required: 
-- any distribution of JDK8 or 11+. Make sure JAVA_HOME environment variable is property set
+- any distribution of JDK11+. Make sure JAVA_HOME environment variable is property set
 - optionally [GraalVM](https://www.graalvm.org/) for native image build and execution
 - optionally [Docker](https://docs.docker.com/) to build project images and run the containerized version of this project
 
