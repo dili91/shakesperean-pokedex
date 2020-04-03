@@ -2,6 +2,9 @@
 
 version: 2.1
 
+orbs:
+  codecov: codecov/codecov@1.0.2
+
 parameters:
   graalvm_sdkman_version:
     type: string
@@ -87,11 +90,14 @@ jobs:
           command: |
             mkdir -p ~/test-results/junit/
             find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} ~/test-results/junit/ \;
+            find . -type f -regex ".*/target/coverage-reports/.*xml" -exec cp {} ~/test-results/junit/ \;
           when: always
       - store_test_results:
           path: ~/test-results
       - store_artifacts:
-          path: ~/test-results/junit    
+          path: ~/test-results/junit
+      - codecov/upload:
+          file: ~/test-results/junit/jacoco.xml       
   integration_tests:
     <<: *openjdk_executor
     steps:
