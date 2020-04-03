@@ -20,6 +20,7 @@
     <surefire-plugin.version>2.22.1</surefire-plugin.version>
     <skip.unit.test>false</skip.unit.test>
     <skip.integration.test>false</skip.integration.test>
+    <jacoco.version>0.8.4</jacoco.version>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -143,6 +144,33 @@
             </configuration>
           </execution>
         </executions>
+      </plugin>
+      <plugin>
+          <groupId>org.jacoco</groupId>
+          <artifactId>jacoco-maven-plugin</artifactId>
+          <version>${jacoco.version}</version>
+          <executions>
+              <execution>
+                  <id>default-prepare-agent</id>
+                  <goals>
+                      <goal>prepare-agent</goal>
+                  </goals>
+              </execution>
+              <execution>
+                  <id>default-report</id>
+                  <goals>
+                      <goal>report</goal>
+                  </goals>
+                  <configuration>
+                      <excludes>
+                        <exclude>*/integration_native/**</exclude>
+                        <exclude>*/integration/**</exclude>
+                      </excludes>
+                      <dataFile>${project.build.directory}/jacoco.exec</dataFile>
+                      <outputDirectory>${project.reporting.outputDirectory}/jacoco</outputDirectory>
+                  </configuration>
+              </execution>
+          </executions>
       </plugin>
     </plugins>
   </build>
