@@ -10,6 +10,11 @@ import javax.ws.rs.WebApplicationException;
  */
 public class RemoteApiException extends RuntimeException {
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
+
     public RemoteApiException(WebApplicationException wrappedException) {
         super(wrappedException);
     }
