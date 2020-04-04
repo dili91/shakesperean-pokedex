@@ -1,38 +1,37 @@
 package org.acme.shakesperean_pokedex.domain;
 
-public class PokemonItem {
+public class ShakespereanPokedexItem {
     private String name;
     private String description;
+    private String translatedDescription;
 
-    public PokemonItem(String name, String description) {
+    public ShakespereanPokedexItem(String name, String description, String translatedDescription) {
         this.name = name;
         this.description = description;
+        this.translatedDescription = translatedDescription;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public String getTranslatedDescription() {
+        return translatedDescription;
     }
 
     public static final class Builder {
         private String name;
         private String description;
+        private String translatedDescription;
 
         private Builder() {
         }
 
-        public static Builder aPokemonItem() {
+        public static Builder aShakespereanPokedexItem() {
             return new Builder();
         }
 
@@ -46,8 +45,13 @@ public class PokemonItem {
             return this;
         }
 
-        public PokemonItem build() {
-            return new PokemonItem(name, description);
+        public Builder withTranslatedDescription(String translatedDescription) {
+            this.translatedDescription = translatedDescription;
+            return this;
+        }
+
+        public ShakespereanPokedexItem build() {
+            return new ShakespereanPokedexItem(name, description, translatedDescription);
         }
     }
 
@@ -57,6 +61,7 @@ public class PokemonItem {
         int result = 1;
         result = prime * result + ((description == null) ? 0 : description.hashCode());
         result = prime * result + ((name == null) ? 0 : name.hashCode());
+        result = prime * result + ((translatedDescription == null) ? 0 : translatedDescription.hashCode());
         return result;
     }
 
@@ -68,7 +73,7 @@ public class PokemonItem {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        PokemonItem other = (PokemonItem) obj;
+        ShakespereanPokedexItem other = (ShakespereanPokedexItem) obj;
         if (description == null) {
             if (other.description != null)
                 return false;
@@ -79,12 +84,18 @@ public class PokemonItem {
                 return false;
         } else if (!name.equals(other.name))
             return false;
+        if (translatedDescription == null) {
+            if (other.translatedDescription != null)
+                return false;
+        } else if (!translatedDescription.equals(other.translatedDescription))
+            return false;
         return true;
     }
 
     @Override
     public String toString() {
-        return "PokemonItem [description=" + description + ", name=" + name + "]";
+        return "ShakespereanPokedexItem [description=" + description + ", name=" + name + ", translatedDescription="
+                + translatedDescription + "]";
     }
 
 }
