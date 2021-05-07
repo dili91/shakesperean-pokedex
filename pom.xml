@@ -20,7 +20,7 @@
     <surefire-plugin.version>2.22.1</surefire-plugin.version>
     <skip.unit.test>false</skip.unit.test>
     <skip.integration.test>false</skip.integration.test>
-    <jacoco.version>0.8.4</jacoco.version>
+    <jacoco.version>0.8.7</jacoco.version>
   </properties>
   <dependencyManagement>
     <dependencies>
